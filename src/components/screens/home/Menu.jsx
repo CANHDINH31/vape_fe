@@ -5,7 +5,13 @@ import { AiOutlineGlobal } from "react-icons/ai";
 
 function Menu() {
   return (
-    <Box bgcolor={"#000"} display={"flex"} justifyContent={"center"} py={1}>
+    <Box
+      bgcolor={"#000"}
+      display={"flex"}
+      justifyContent={"center"}
+      py={1}
+      sx={{ cursor: "pointer" }}
+    >
       <Box
         width={"88%"}
         display={"flex"}
