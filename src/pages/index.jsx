@@ -4,6 +4,7 @@ import Warning from "../components/screens/home/Warning";
 import Menu from "../components/screens/home/Menu";
 import Banner from "../components/screens/home/Banner";
 import Difference from "../components/screens/home/Difference";
+import Real from "../components/screens/home/Real";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Menu />
       <Banner />
       <Difference />
+      <Real />
     </Box>
   );
 }
