@@ -3,7 +3,7 @@ import React from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { AiOutlineGlobal } from "react-icons/ai";
 
-function Menu() {
+function Header() {
   return (
     <Box
       bgcolor={"#000"}
@@ -11,6 +11,13 @@ function Menu() {
       justifyContent={"center"}
       py={1}
       sx={{ cursor: "pointer" }}
+      position={"sticky"}
+      top={0}
+      left={0}
+      right={0}
+      zIndex={999}
+      borderTop={"1px solid rgb(61, 61, 61)"}
+      borderBottom={"1px solid rgb(61, 61, 61)"}
     >
       <Box
         width={"88%"}
@@ -60,4 +67,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default Header;
