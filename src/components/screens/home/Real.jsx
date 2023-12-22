@@ -23,6 +23,7 @@ function Real() {
           fontSize={"3rem"}
           lineHeight={1}
           fontWeight={"bold"}
+          data-aos="fade-up"
         >
           Unleash the Flavor for
         </Typography>
@@ -35,6 +36,7 @@ function Real() {
             "-webkit-background-clip": "text",
             "-webkit-text-fill-color": "transparent",
           }}
+          data-aos="fade-up"
         >
           Real.
         </Box>
@@ -44,6 +46,7 @@ function Real() {
           color={"white"}
           marginTop={"1.3rem"}
           fontWeight={500}
+          data-aos="fade-up"
         >
           Rich and restorative taste, all designed for you to
           <br />
@@ -65,6 +68,7 @@ function Real() {
           src={"/img/RealVape.webp"}
           sx={{ objectFit: "contain" }}
           zIndex={1}
+          data-aos="zoom-in"
         />
       </Box>
     </Box>

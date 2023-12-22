@@ -28,6 +28,7 @@ function Drop() {
           lineHeight={1}
           fontWeight={"bold"}
           color={"white"}
+          data-aos="fade-up"
         >
           Professionalism in{" "}
         </Typography>
@@ -36,6 +37,7 @@ function Drop() {
           lineHeight={1}
           fontWeight={"bold"}
           color={"white"}
+          data-aos="fade-up"
         >
           Every{" "}
           <Box
@@ -58,6 +60,7 @@ function Drop() {
           mt={"2rem"}
           color={"white"}
           fontWeight={500}
+          data-aos="fade-up"
         >
           Using high-quality and natural ingredients, OX
           <br />

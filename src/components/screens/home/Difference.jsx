@@ -22,7 +22,12 @@ function Difference() {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <Typography fontSize={"2.6rem"} fontWeight={"bold"} lineHeight={1}>
+        <Typography
+          fontSize={"2.6rem"}
+          fontWeight={"bold"}
+          lineHeight={1}
+          data-aos="fade-up"
+        >
           Breathe in, Taste the
         </Typography>
         <Box
@@ -34,6 +39,7 @@ function Difference() {
             fontWeight: "bold",
             lineHeight: 1,
           }}
+          data-aos="fade-up"
         >
           Difference.
         </Box>
@@ -43,6 +49,7 @@ function Difference() {
           fontSize={20}
           whiteSpace={"nowrap"}
           fontWeight={500}
+          data-aos="fade-up"
         >
           After testing numerous devices and researching feedback from countless
           users, we've

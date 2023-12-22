@@ -12,7 +12,7 @@ function Banner() {
         display={"block"}
         sx={{ objectFit: "cover" }}
       />
-      <Box position={"absolute"} top={"40%"} left={"10%"}>
+      <Box position={"absolute"} top={"40%"} left={"10%"} data-aos="fade-up">
         <Box
           component={"img"}
           src={"/img/BannerText.webp"}

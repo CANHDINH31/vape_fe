@@ -46,6 +46,7 @@ function Flavor() {
         fontSize={"3.5rem"}
         lineHeight={1}
         fontWeight={"bold"}
+        data-aos="fade-up"
       >
         10 FLAVORS
       </Typography>
@@ -55,6 +56,7 @@ function Flavor() {
         lineHeight={2}
         fontSize={20}
         fontWeight={500}
+        data-aos="fade-up"
       >
         Your Flavor, Your Rules.
       </Typography>

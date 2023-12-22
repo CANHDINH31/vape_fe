@@ -18,7 +18,12 @@ function Magic() {
         right={"10%"}
         sx={{ transform: "translateY(-50%)" }}
       >
-        <Typography fontSize={"3rem"} lineHeight={1} fontWeight={"bold"}>
+        <Typography
+          fontSize={"3rem"}
+          lineHeight={1}
+          fontWeight={"bold"}
+          data-aos="fade-up"
+        >
           Magic in Every{" "}
           <Box component={"span"} color={"white"} fontSize={"4.5rem"}>
             Cloud.
@@ -29,6 +34,7 @@ function Magic() {
           lineHeight={1.3}
           mt={"1.5rem"}
           fontWeight={500}
+          data-aos="fade-up"
         >
           With a smooth vaping and gentle throat hit -- OX PASSION
           <br />

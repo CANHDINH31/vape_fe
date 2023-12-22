@@ -20,6 +20,7 @@ function Product() {
         justifyContent={"center"}
         gap={2}
         width={"100%"}
+        data-aos="fade-up"
       >
         <Typography color={"white"} fontWeight={"bold"} fontSize={"2rem"}>
           PRODUCT SPECIFICATION
