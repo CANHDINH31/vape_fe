@@ -7,8 +7,9 @@ function Real() {
       <Box
         component={"img"}
         src={"/img/Real.webp"}
-        height={"100vh"}
+        width={"100%"}
         sx={{ objectFit: "contain" }}
+        display={"block"}
       />
       <Box
         position={"absolute"}

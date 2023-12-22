@@ -5,6 +5,7 @@ import Menu from "../components/screens/home/Menu";
 import Banner from "../components/screens/home/Banner";
 import Difference from "../components/screens/home/Difference";
 import Real from "../components/screens/home/Real";
+import Magic from "../components/screens/home/Maigc";
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
       <Banner />
       <Difference />
       <Real />
+      <Magic />
     </Box>
   );
 }

@@ -7,9 +7,11 @@ function Difference() {
       <Box
         component={"img"}
         src={"/img/Difference.webp"}
-        height={"100vh"}
+        width={"100%"}
         sx={{ objectFit: "contain" }}
+        display={"block"}
       />
+
       <Box
         position={"absolute"}
         top={"8%"}
