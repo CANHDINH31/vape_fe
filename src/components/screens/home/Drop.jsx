@@ -52,7 +52,13 @@ function Drop() {
             Drop
           </Box>
         </Typography>
-        <Typography fontSize={20} lineHeight={1.3} mt={"2rem"} color={"white"}>
+        <Typography
+          fontSize={20}
+          lineHeight={1.3}
+          mt={"2rem"}
+          color={"white"}
+          fontWeight={500}
+        >
           Using high-quality and natural ingredients, OX
           <br />
           PASSION has been persevering in production with

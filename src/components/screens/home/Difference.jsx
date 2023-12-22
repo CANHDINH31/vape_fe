@@ -42,6 +42,7 @@ function Difference() {
           mt={3}
           fontSize={20}
           whiteSpace={"nowrap"}
+          fontWeight={500}
         >
           After testing numerous devices and researching feedback from countless
           users, we've

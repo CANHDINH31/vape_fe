@@ -53,7 +53,8 @@ function Flavor() {
         color={"white"}
         textAlign={"center"}
         lineHeight={2}
-        fontSize={"1.5rem"}
+        fontSize={20}
+        fontWeight={500}
       >
         Your Flavor, Your Rules.
       </Typography>

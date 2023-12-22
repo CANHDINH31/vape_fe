@@ -43,6 +43,7 @@ function Real() {
           lineHeight={1.3}
           color={"white"}
           marginTop={"1.3rem"}
+          fontWeight={500}
         >
           Rich and restorative taste, all designed for you to
           <br />
