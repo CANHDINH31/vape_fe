@@ -8,6 +8,7 @@ import Real from "../components/screens/home/Real";
 import Magic from "../components/screens/home/Maigc";
 import Drop from "../components/screens/home/Drop";
 import Flavor from "../components/screens/home/Flavor";
+import Product from "../components/screens/home/Product";
 
 function Home() {
   return (
@@ -20,6 +21,7 @@ function Home() {
       <Magic />
       <Drop />
       <Flavor />
+      <Product />
     </Box>
   );
 }
