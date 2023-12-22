@@ -24,7 +24,7 @@ function Magic() {
             Cloud.
           </Box>
         </Typography>
-        <Typography fontSize={"1.5rem"} lineHeight={1.3} mt={"1.5rem"}>
+        <Typography fontSize={20} lineHeight={1.3} mt={"1.5rem"}>
           With a smooth vaping and gentle throat hit -- OX PASSION
           <br />
           promises to deliver a fantastic and delightful sensory experience.

@@ -12,14 +12,14 @@ function Banner() {
         display={"block"}
         sx={{ objectFit: "cover" }}
       />
-      <Box position={"absolute"} top={"40%"} right={"10%"}>
+      <Box position={"absolute"} top={"40%"} left={"10%"}>
         <Box
           component={"img"}
           src={"/img/BannerText.webp"}
           width={"60%"}
           sx={{ objectFit: "contain" }}
         />
-        <Typography mt={2} color={"white"} fontSize={22} fontWeight={"bold"}>
+        <Typography mt={1} color={"white"} fontSize={18} fontWeight={"bold"}>
           Where Flavor Meets Imagination.
         </Typography>
       </Box>

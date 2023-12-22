@@ -22,7 +22,7 @@ function Difference() {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <Typography fontSize={"3rem"} fontWeight={"bold"} lineHeight={1}>
+        <Typography fontSize={"2.6rem"} fontWeight={"bold"} lineHeight={1}>
           Breathe in, Taste the
         </Typography>
         <Box
@@ -30,14 +30,19 @@ function Difference() {
             backgroundImage: "linear-gradient(to right,#2af29c,#02a2fa)",
             "-webkit-background-clip": "text",
             "-webkit-text-fill-color": "transparent",
-            fontSize: "4rem",
+            fontSize: "3rem",
             fontWeight: "bold",
             lineHeight: 1,
           }}
         >
           Difference.
         </Box>
-        <Typography textAlign={"center"} mt={4} fontSize={24}>
+        <Typography
+          textAlign={"center"}
+          mt={3}
+          fontSize={20}
+          whiteSpace={"nowrap"}
+        >
           After testing numerous devices and researching feedback from countless
           users, we've
           <br />

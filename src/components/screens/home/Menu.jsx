@@ -27,19 +27,19 @@ function Menu() {
           sx={{ objectFit: "contain" }}
         />
         <Box display={"flex"} alignItems={"center"} gap={4}>
-          <Typography color={"white"} fontSize={14}>
+          <Typography color={"white"} fontSize={12} fontWeight={500}>
             PRODUCTS
           </Typography>
-          <Typography color={"white"} fontSize={14}>
+          <Typography color={"white"} fontSize={12} fontWeight={500}>
             LIQUID
           </Typography>
-          <Typography color={"white"} fontSize={14}>
+          <Typography color={"white"} fontSize={12} fontWeight={500}>
             DISPOSABLE
           </Typography>
-          <Typography color={"white"} fontSize={14}>
+          <Typography color={"white"} fontSize={12} fontWeight={500}>
             EXPLORE OXVA
           </Typography>
-          <Typography color={"white"} fontSize={14}>
+          <Typography color={"white"} fontSize={12} fontWeight={500}>
             SUPPORT
           </Typography>
         </Box>

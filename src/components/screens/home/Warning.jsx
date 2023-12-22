@@ -3,12 +3,12 @@ import React from "react";
 
 function Warning() {
   return (
-    <Box paddingY={3}>
+    <Box paddingY={2}>
       <Typography
         textAlign={"center"}
-        fontSize={"1.5rem"}
+        fontSize={"1.2rem"}
         lineHeight={1}
-        fontWeight={600}
+        fontWeight={700}
       >
         WARNING: This product contains
         <br />

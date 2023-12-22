@@ -22,7 +22,7 @@ function Real() {
           color={"white"}
           fontSize={"3rem"}
           lineHeight={1}
-          fontWeight={600}
+          fontWeight={"bold"}
         >
           Unleash the Flavor for
         </Typography>
@@ -39,7 +39,7 @@ function Real() {
           Real.
         </Box>
         <Typography
-          fontSize={"1.5rem"}
+          fontSize={20}
           lineHeight={1.3}
           color={"white"}
           marginTop={"1.3rem"}
