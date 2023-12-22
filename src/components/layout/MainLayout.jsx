@@ -5,15 +5,18 @@ import Warning from "./warning/Warning";
 import Footer from "./footer/Footer";
 import { useNavigate } from "react-router-dom";
 import ListContact from "./contact/ListContact";
+import ScrollToTop from "./ScrollToTop";
 
 function MainLayout({ children, showWarning = true }) {
   const naviagte = useNavigate();
+
   useEffect(() => {
     const isVerifyAge = sessionStorage.getItem("verifyAge");
     if (!isVerifyAge) {
       naviagte("/verify-age");
     }
   }, []);
+
   return (
     <Box>
       {showWarning && <Warning />}
@@ -21,6 +24,7 @@ function MainLayout({ children, showWarning = true }) {
       {children}
       <Footer />
       <ListContact />
+      <ScrollToTop />
     </Box>
   );
 }
