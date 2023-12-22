@@ -7,9 +7,10 @@ function Banner() {
       <Box
         component={"img"}
         src={"/img/Banner.webp"}
-        width={"100%"}
+        height={"90vh"}
+        width={"100vw"}
         display={"block"}
-        sx={{ objectFit: "contain" }}
+        sx={{ objectFit: "cover" }}
       />
       <Box position={"absolute"} top={"40%"} right={"10%"}>
         <Box

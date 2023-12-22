@@ -7,8 +7,9 @@ function Magic() {
       <Box
         component={"img"}
         src={"/img/Magic.webp"}
-        width={"100%"}
-        sx={{ objectFit: "contain" }}
+        height={"90vh"}
+        width={"100vw"}
+        sx={{ objectFit: "cover" }}
         display={"block"}
       />
       <Box
