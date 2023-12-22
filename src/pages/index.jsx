@@ -7,6 +7,7 @@ import Difference from "../components/screens/home/Difference";
 import Real from "../components/screens/home/Real";
 import Magic from "../components/screens/home/Maigc";
 import Drop from "../components/screens/home/Drop";
+import Flavor from "../components/screens/home/Flavor";
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <Real />
       <Magic />
       <Drop />
+      <Flavor />
     </Box>
   );
 }
