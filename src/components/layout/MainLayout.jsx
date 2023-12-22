@@ -4,6 +4,7 @@ import Header from "./header/Header";
 import Warning from "./warning/Warning";
 import Footer from "./footer/Footer";
 import { useNavigate } from "react-router-dom";
+import ListContact from "./contact/ListContact";
 
 function MainLayout({ children, showWarning = true }) {
   const naviagte = useNavigate();
@@ -19,6 +20,7 @@ function MainLayout({ children, showWarning = true }) {
       <Header />
       {children}
       <Footer />
+      <ListContact />
     </Box>
   );
 }
