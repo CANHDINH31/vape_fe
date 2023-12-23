@@ -2,8 +2,11 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { AiOutlineGlobal } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <Box
       bgcolor={"#000"}
@@ -34,7 +37,12 @@ function Header() {
           sx={{ objectFit: "contain" }}
         />
         <Box display={"flex"} alignItems={"center"} gap={4}>
-          <Typography color={"white"} fontSize={12} fontWeight={500}>
+          <Typography
+            color={"white"}
+            fontSize={12}
+            fontWeight={500}
+            onClick={() => navigate("/product")}
+          >
             PRODUCTS
           </Typography>
           <Typography color={"white"} fontSize={12} fontWeight={500}>
