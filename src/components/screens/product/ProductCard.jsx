@@ -6,6 +6,8 @@ import {
   HiOutlineEye,
 } from "react-icons/hi2";
 
+import { useNavigate } from "react-router-dom";
+
 const Wrapper = styled(Box)({
   position: "relative",
   cursor: "pointer",
@@ -75,8 +77,10 @@ const WrapIcon = styled(Box)({
 });
 
 function ProductCard() {
+  const navigate = useNavigate();
+
   return (
-    <Wrapper>
+    <Wrapper onClick={() => navigate("/product/1")}>
       <WrapImg>
         <Box component={"img"} src={"/img/Product1.webp"} className="img" />
         <Box className={"overlay"}>
