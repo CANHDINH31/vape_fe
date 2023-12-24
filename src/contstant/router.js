@@ -3,6 +3,7 @@ import AgeVerify from "../pages/AgeVerify";
 import Blank from "../pages/Blank";
 import DetailProduct from "../pages/DetailProduct";
 import Product from "../pages/Product";
+import ShoppingCart from "../pages/ShoppingCart";
 
 export const listRouter = [
   { path: "/", element: <Home /> },
@@ -10,5 +11,6 @@ export const listRouter = [
   { path: "/about:blank", element: <Blank /> },
   { path: "/product/:id", element: <DetailProduct /> },
   { path: "/product", element: <Product /> },
+  { path: "/shopping-cart", element: <ShoppingCart /> },
   { path: "*", element: <Home /> },
 ];
