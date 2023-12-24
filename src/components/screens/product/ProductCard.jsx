@@ -111,7 +111,7 @@ function ProductCard() {
         >
           <Rating size="small" value={5} />
           <Typography fontSize={12} fontWeight={"bold"}>
-            16 reviews
+            16 IN STOCK
           </Typography>
         </Box>
       </Stack>

@@ -3,6 +3,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { Container, Box, Typography, Grid } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
 import DetailProductImg from "../components/screens/detail-product/DetailProductImg";
+import InfoDetailProduct from "../components/screens/detail-product/InfoDetailProduct";
 
 function DetailProduct() {
   return (
@@ -30,10 +31,12 @@ function DetailProduct() {
           </Box>
           <Box mt={4}>
             <Grid container spacing={4}>
-              <Grid item xs={6}>
+              <Grid item xs={6} zIndex={2}>
                 <DetailProductImg />
               </Grid>
-              <Grid item xs={6}></Grid>
+              <Grid item xs={6}>
+                <InfoDetailProduct zIndex1={1} />
+              </Grid>
             </Grid>
           </Box>
         </Box>
