@@ -6,12 +6,13 @@ import ConfirmDelete from "../../components/common/ConfirmDelete";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { notify } from "../../utils/helpers/notify";
-import { create, listProduct } from "../../utils/api/product";
+import { create, deleteProduct, listProduct } from "../../utils/api/product";
 import { DataGrid } from "@mui/x-data-grid";
 
 function AProduct() {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
   const [idDelete, setIdDelete] = useState("");
 
@@ -61,7 +62,7 @@ function AProduct() {
           <Button
             variant="contained"
             size="small"
-            // onClick={() => handleDetail(params.row)}
+            onClick={() => handleOpenConfirmUpdate(params.row)}
           >
             Chi tiết
           </Button>
@@ -202,7 +203,18 @@ function AProduct() {
     setIdDelete(id);
   };
 
-  const handleDeleteProduct = () => {};
+  const handleOpenConfirmUpdate = (data) => {
+    console.log(data);
+  };
+
+  const handleDeleteProduct = async () => {
+    try {
+      await deleteProduct(idDelete);
+      getListProduct();
+      notify("success", "Xoá sản phẩm thành công");
+    } catch (error) {}
+    setIsOpenDelete(false);
+  };
 
   useEffect(() => {
     getListProduct();
@@ -230,7 +242,232 @@ function AProduct() {
           rowHeight={150}
         />
       </Box>
-      {/* Modal Update */}
+      {/* Modal create */}
+      <ModalUpdate
+        open={isOpenAdd}
+        title={"Thêm sản phẩm"}
+        maxWidth={"lg"}
+        handleClose={handleReset}
+        handleOk={handleAddProduct}
+      >
+        <Grid container spacing={4}>
+          <Grid item xs={6}>
+            <Typography>Tên sản phẩm:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Giá:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Mô tả:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              multiline
+              rows={8}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography>Số lượng:</Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>Tên phân loại:</Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  value={nameType}
+                  onChange={(e) => setNameType(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>Thêm loại: (ngăn cách nhau bởi dấu ,)</Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  value={types}
+                  onChange={(e) => setTypes(e.target.value)}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            {url1 ? (
+              <>
+                <Typography variant="subtitle2" mb={1}>
+                  Ảnh 1:
+                </Typography>
+                <Box display={"flex"} alignItems={"center"} gap={2}>
+                  <Box
+                    component={"img"}
+                    src={url1}
+                    width={200}
+                    height={200}
+                    sx={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => setUrl1("")}
+                  >
+                    Xóa
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Typography>Ảnh 1:</Typography>
+                <TextField
+                  type="file"
+                  placeholder="Upload ảnh 1"
+                  size="small"
+                  fullWidth
+                  onChange={handleUpload1}
+                  accept="image/png, image/gif, image/jpeg"
+                  multiline={false}
+                />
+              </>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            {url2 ? (
+              <>
+                <Typography variant="subtitle2" mb={1}>
+                  Ảnh 2:
+                </Typography>
+                <Box display={"flex"} alignItems={"center"} gap={2}>
+                  <Box
+                    component={"img"}
+                    src={url2}
+                    width={200}
+                    height={200}
+                    sx={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => setUrl2("")}
+                  >
+                    Xóa
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Typography>Ảnh 2:</Typography>
+                <TextField
+                  type="file"
+                  placeholder="Upload ảnh 2"
+                  size="small"
+                  fullWidth
+                  onChange={handleUpload2}
+                  accept="image/png, image/gif, image/jpeg"
+                  multiline={false}
+                />
+              </>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            {url3 ? (
+              <>
+                <Typography variant="subtitle2" mb={1}>
+                  Ảnh 3:
+                </Typography>
+                <Box display={"flex"} alignItems={"center"} gap={2}>
+                  <Box
+                    component={"img"}
+                    src={url3}
+                    width={200}
+                    height={200}
+                    sx={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => setUrl3("")}
+                  >
+                    Xóa
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Typography>Ảnh 3:</Typography>
+                <TextField
+                  type="file"
+                  placeholder="Upload ảnh 3"
+                  size="small"
+                  fullWidth
+                  onChange={handleUpload3}
+                  accept="image/png, image/gif, image/jpeg"
+                  multiline={false}
+                />
+              </>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            {url4 ? (
+              <>
+                <Typography variant="subtitle2" mb={1}>
+                  Ảnh 4:
+                </Typography>
+                <Box display={"flex"} alignItems={"center"} gap={2}>
+                  <Box
+                    component={"img"}
+                    src={url4}
+                    width={200}
+                    height={200}
+                    sx={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => setUrl4("")}
+                  >
+                    Xóa
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Typography>Ảnh 4:</Typography>
+                <TextField
+                  type="file"
+                  placeholder="Upload ảnh 4"
+                  size="small"
+                  fullWidth
+                  onChange={handleUpload4}
+                  accept="image/png, image/gif, image/jpeg"
+                  multiline={false}
+                />
+              </>
+            )}
+          </Grid>
+        </Grid>
+      </ModalUpdate>
+
+      {/* Modal create */}
       <ModalUpdate
         open={isOpenAdd}
         title={"Thêm sản phẩm"}
