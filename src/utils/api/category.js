@@ -10,3 +10,6 @@ export const addProduct = async (id, listId) =>
 
 export const deleteCategory = async (id) =>
   await request.delete("/api/category/" + id);
+
+export const updateCategory = async (id, payload) =>
+  await request.patch("/api/category/" + id, payload);
