@@ -38,6 +38,7 @@ function AProduct() {
   const [number, setNumber] = useState(0);
   const [nameType, setNameType] = useState("");
   const [types, setTypes] = useState("");
+  const [struct, setStruct] = useState("");
   const [url1, setUrl1] = useState("");
   const [url2, setUrl2] = useState("");
   const [url3, setUrl3] = useState("");
@@ -178,6 +179,7 @@ function AProduct() {
   const handleReset = () => {
     setIsOpenAdd(false);
     setName("");
+    setStruct("");
     setPrice(0);
     setDescription("");
     setNameType("");
@@ -192,6 +194,7 @@ function AProduct() {
   const handleResetUpdate = () => {
     setIsOpenUpdate(false);
     setIdUpdate("");
+    setStruct("");
     setName("");
     setPrice(0);
     setDescription("");
@@ -211,6 +214,7 @@ function AProduct() {
         price: Number(price),
         number: Number(number),
         description,
+        struct,
         nameType,
         types: types?.split(","),
         url1,
@@ -242,6 +246,7 @@ function AProduct() {
         price: Number(price),
         number: Number(number),
         description,
+        struct,
         nameType,
         types: types?.split(","),
         url1,
@@ -280,6 +285,7 @@ function AProduct() {
     setPrice(data?.price || 0);
     setTypes(data?.types?.join(","));
     setDescription(data?.description);
+    setStruct(data?.struct);
 
     setUrl1(data?.url1);
     setUrl2(data?.url2);
@@ -401,35 +407,42 @@ function AProduct() {
             />
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Số lượng:</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography>Tên phân loại:</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={nameType}
-                  onChange={(e) => setNameType(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography>Thêm loại: (ngăn cách nhau bởi dấu ,)</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={types}
-                  onChange={(e) => setTypes(e.target.value)}
-                />
-              </Grid>
-            </Grid>
+            <Typography>Thông số máy:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              multiline
+              rows={8}
+              value={struct}
+              onChange={(e) => setStruct(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Số lượng:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Tên phân loại:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={nameType}
+              onChange={(e) => setNameType(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Thêm loại: (ngăn cách nhau bởi dấu ,)</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={types}
+              onChange={(e) => setTypes(e.target.value)}
+            />
           </Grid>
           <Grid item xs={6}>
             {url1 ? (
@@ -626,35 +639,42 @@ function AProduct() {
             />
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Số lượng:</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography>Tên phân loại:</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={nameType}
-                  onChange={(e) => setNameType(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography>Thêm loại: (ngăn cách nhau bởi dấu ,)</Typography>
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={types}
-                  onChange={(e) => setTypes(e.target.value)}
-                />
-              </Grid>
-            </Grid>
+            <Typography>Thông số máy:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              multiline
+              rows={8}
+              value={struct}
+              onChange={(e) => setStruct(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Số lượng:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Tên phân loại:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={nameType}
+              onChange={(e) => setNameType(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Thêm loại: (ngăn cách nhau bởi dấu ,)</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={types}
+              onChange={(e) => setTypes(e.target.value)}
+            />
           </Grid>
           <Grid item xs={6}>
             {url1 ? (
