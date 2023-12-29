@@ -1,5 +1,5 @@
 import { Box, Rating, Stack, Typography, styled } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HiOutlineShoppingBag,
   HiOutlineHeart,
@@ -76,7 +76,7 @@ const WrapIcon = styled(Box)({
   },
 });
 
-function ProductCard({ item }) {
+function ProductCard({ item, isTop = false }) {
   const navigate = useNavigate();
 
   return (
@@ -90,7 +90,11 @@ function ProductCard({ item }) {
           {/* <WrapIcon>
             <HiOutlineShoppingBag />
           </WrapIcon> */}
-          <WrapIcon>
+          <WrapIcon
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
             <HiOutlineHeart />
           </WrapIcon>
         </Box>
@@ -115,9 +119,15 @@ function ProductCard({ item }) {
           gap={1}
         >
           <Rating size="small" value={5} />
-          <Typography fontSize={12} fontWeight={"bold"}>
-            {item?.number} Sản phẩm
-          </Typography>
+          {isTop ? (
+            <Typography fontSize={12} fontWeight={"bold"}>
+              {item?.views} Lượt xem
+            </Typography>
+          ) : (
+            <Typography fontSize={12} fontWeight={"bold"}>
+              {item?.number} Sản phẩm
+            </Typography>
+          )}
         </Box>
       </Stack>
     </Wrapper>

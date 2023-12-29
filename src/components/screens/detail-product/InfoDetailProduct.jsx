@@ -52,16 +52,21 @@ function InfoDetailProduct({ data }) {
 
   return (
     <Box>
-      <Typography fontSize={24} fontWeight={"bold"} color={"#222"}>
+      <Box fontSize={24} fontWeight={"bold"} color={"#222"}>
         {data?.name}
-      </Typography>
+        <Typography
+          ml={2}
+          fontSize={14}
+          component={"span"}
+        >{`(${data?.views}) Lượt xem`}</Typography>
+      </Box>
       <Box
         mt={2}
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"flex-end"}
       >
-        <Box display={"flex"} gap={1} alignItems={"flex-end"}>
+        <Box display={"flex"} gap={1} alignItems={"center"}>
           <Typography color={"red"} fontSize={14} fontWeight={500}>
             ${" "}
             {data?.price > 0
@@ -71,14 +76,15 @@ function InfoDetailProduct({ data }) {
                 })
               : "Liên hệ để thông tin giá"}
           </Typography>
+
+          <Rating size="small" value={5} />
+        </Box>
+        <Box display={"flex"} gap={1} alignItems={"center"}>
           <Chip
             size="small"
             color={data?.number > 0 ? "success" : "error"}
             label={data?.number > 0 ? "Còn hàng" : "Hết hàng"}
           />
-        </Box>
-        <Box display={"flex"} gap={1} alignItems={"center"}>
-          <Rating size="small" value={5} />
           <Typography color={"red"} fontSize={12} fontWeight={500}>
             {data?.number} Sản phẩm
           </Typography>

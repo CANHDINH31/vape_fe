@@ -69,10 +69,9 @@ function AProduct() {
     { field: "price", headerName: "Giá", width: 100 },
     { field: "number", headerName: "Số lượng", width: 100 },
     {
-      field: "types",
-      headerName: "Phân loại",
+      field: "views",
+      headerName: "Số lượt xem",
       width: 250,
-      renderCell: (params) => params.row.types?.join(", "),
     },
     {
       field: "",

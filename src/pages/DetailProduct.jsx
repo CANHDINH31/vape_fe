@@ -5,13 +5,23 @@ import { IoIosArrowForward } from "react-icons/io";
 import DetailProductImg from "../components/screens/detail-product/DetailProductImg";
 import InfoDetailProduct from "../components/screens/detail-product/InfoDetailProduct";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../utils/api/product";
+import { addViews, getProductById } from "../utils/api/product";
 
 function DetailProduct() {
   const { id } = useParams();
   const [data, setData] = useState({});
 
   useEffect(() => {
+    const handleAddViews = async () => {
+      try {
+        await addViews(id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    handleAddViews();
+
     const getData = async () => {
       try {
         const res = await getProductById(id);

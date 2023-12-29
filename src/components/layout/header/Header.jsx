@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  HiOutlineShoppingBag,
+  // HiOutlineShoppingBag,
   HiOutlineHeart,
   HiOutlineUser,
 } from "react-icons/hi2";
@@ -87,8 +87,8 @@ function Header() {
             padding={"8px 16px"}
             borderRadius={"18px"}
           >
-            <HiOutlineShoppingBag fontSize={24} />
-            <Box width={"1px"} height={20} bgcolor={"#cecece"} />
+            {/* <HiOutlineShoppingBag fontSize={24} />
+            <Box width={"1px"} height={20} bgcolor={"#cecece"} /> */}
             <HiOutlineHeart fontSize={24} />
             <Box width={"1px"} height={20} bgcolor={"#cecece"} />
             <HiOutlineUser
