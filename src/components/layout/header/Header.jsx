@@ -6,18 +6,28 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiOutlineShoppingBag,
   HiOutlineHeart,
   HiOutlineUser,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { listCategory } from "../../../utils/api/category";
 
 function Header() {
   const navigate = useNavigate();
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
+  const [arrCategory, setArrCategory] = useState([]);
+
+  useEffect(() => {
+    const getListCategory = async () => {
+      const res = await listCategory();
+      setArrCategory(res.data);
+    };
+    getListCategory();
+  }, []);
 
   return (
     <>
@@ -43,33 +53,22 @@ function Header() {
         >
           <Box
             component={"img"}
-            src={
-              "https://cdn.shopifycdn.net/s/files/1/0502/8033/3505/files/oxva_logo_red.svg?v=1700030061"
-            }
-            width={144}
+            src={"/img/Logo.png"}
+            height={50}
             sx={{ objectFit: "contain" }}
+            onClick={() => navigate("/")}
           />
           <Box display={"flex"} alignItems={"center"} gap={4}>
-            <Typography
-              color={"white"}
-              fontSize={12}
-              fontWeight={500}
-              onClick={() => navigate("/product")}
-            >
-              PRODUCTS
-            </Typography>
-            <Typography color={"white"} fontSize={12} fontWeight={500}>
-              LIQUID
-            </Typography>
-            <Typography color={"white"} fontSize={12} fontWeight={500}>
-              DISPOSABLE
-            </Typography>
-            <Typography color={"white"} fontSize={12} fontWeight={500}>
-              EXPLORE OXVA
-            </Typography>
-            <Typography color={"white"} fontSize={12} fontWeight={500}>
-              SUPPORT
-            </Typography>
+            {arrCategory?.map((e) => (
+              <Typography
+                color={"white"}
+                fontSize={12}
+                fontWeight={500}
+                onClick={() => navigate(`/category/${e._id}`)}
+              >
+                {e?.name?.toUpperCase()}
+              </Typography>
+            ))}
           </Box>
           <Box
             display={"flex"}

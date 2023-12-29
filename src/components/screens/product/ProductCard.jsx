@@ -76,13 +76,13 @@ const WrapIcon = styled(Box)({
   },
 });
 
-function ProductCard() {
+function ProductCard({ item }) {
   const navigate = useNavigate();
 
   return (
     <Wrapper onClick={() => navigate("/product/1")}>
       <WrapImg>
-        <Box component={"img"} src={"/img/Product1.webp"} className="img" />
+        <Box component={"img"} src={item?.url1} className="img" />
         <Box className={"overlay"}>
           <WrapIcon>
             <HiOutlineEye />
@@ -96,12 +96,17 @@ function ProductCard() {
         </Box>
       </WrapImg>
 
-      <Stack textAlign={"center"} gap={"2px"} mt={1}>
+      <Stack textAlign={"center"} gap={"2px"} mt={1} width={270}>
         <Typography fontSize={14} fontWeight={"bold"}>
-          OXVA XLIM POD KIT
+          {item?.name}
         </Typography>
         <Typography fontSize={10} color="red" fontWeight={"bold"}>
-          1,000,000 VNĐ
+          {item?.price > 0
+            ? item?.price.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })
+            : "Liên hệ để thông tin giá"}
         </Typography>
         <Box
           display={"flex"}
@@ -111,7 +116,7 @@ function ProductCard() {
         >
           <Rating size="small" value={5} />
           <Typography fontSize={12} fontWeight={"bold"}>
-            16 IN STOCK
+            {item?.number} Sản phẩm
           </Typography>
         </Box>
       </Stack>

@@ -13,7 +13,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect } from "react";
 import ConfirmDelete from "../../components/common/ConfirmDelete";
 
-function Category() {
+function ACategory() {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [name, setName] = useState("");
   const [data, setData] = useState([]);
@@ -236,4 +236,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default ACategory;

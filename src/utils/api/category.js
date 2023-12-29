@@ -5,6 +5,9 @@ export const create = async (payload) =>
 
 export const listCategory = async () => await request.get("/api/category");
 
+export const getCategoryById = async (id) =>
+  await request.get("/api/category/" + id);
+
 export const addProduct = async (id, listId) =>
   await request.put("/api/category/add-product/" + id, { listId });
 

@@ -21,7 +21,7 @@ function MainLayout({ children, showWarning = true }) {
     <Box>
       {showWarning && <Warning />}
       <Header />
-      {children}
+      <Box minHeight={"70vh"}>{children}</Box>
       <Footer />
       <ListContact />
       <ScrollToTop />
