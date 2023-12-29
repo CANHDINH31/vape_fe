@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/admin/AdminLayout";
-import { Box, Typography, Button, TextField, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Grid,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import ModalUpdate from "../../components/common/ModalUpdate";
 import ConfirmDelete from "../../components/common/ConfirmDelete";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -13,11 +21,13 @@ import {
   updateProduct,
 } from "../../utils/api/product";
 import { DataGrid } from "@mui/x-data-grid";
+import { addProduct, listCategory } from "../../utils/api/category";
 
 function AProduct() {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+  const [isOpenAddToCategory, setIsOpenAddToCategory] = useState(false);
 
   const [idDelete, setIdDelete] = useState("");
   const [idUpdate, setIdUpdate] = useState("");
@@ -33,6 +43,10 @@ function AProduct() {
   const [url3, setUrl3] = useState("");
   const [url4, setUrl4] = useState("");
   const [data, setData] = useState([]);
+
+  const [listId, setListId] = useState([]);
+  const [idCategory, setIdCategory] = useState("");
+  const [arrCategory, setArrCategory] = useState([]);
 
   const columns = [
     {
@@ -210,6 +224,17 @@ function AProduct() {
     handleReset();
   };
 
+  const handleAddProductToCategory = async () => {
+    try {
+      if (idCategory) {
+        await addProduct(idCategory, listId);
+        notify("success", "Thêm sản phẩm vào danh mục thành công thành công");
+        getListProduct();
+      }
+    } catch (error) {}
+    handleResetAddToCategory();
+  };
+
   const handleUpdateProduct = async () => {
     try {
       await updateProduct(idUpdate, {
@@ -273,7 +298,23 @@ function AProduct() {
     setIsOpenDelete(false);
   };
 
+  const handleResetAddToCategory = () => {
+    setListId([]);
+    setIdCategory(arrCategory?.[0]?._id);
+    setIsOpenAddToCategory(false);
+  };
+
   useEffect(() => {
+    const getListCategory = async () => {
+      try {
+        const res = await listCategory();
+        setArrCategory(res?.data);
+        setIdCategory(res?.data?.[0]?._id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getListCategory();
     getListProduct();
   }, []);
 
@@ -287,9 +328,26 @@ function AProduct() {
         <Typography fontWeight={"bold"} fontSize={20}>
           Quản lý sản phẩm
         </Typography>
-        <Button variant="contained" onClick={() => setIsOpenAdd(true)}>
-          Thêm sản phẩm
-        </Button>
+        <Box display={"flex"} alignItems={"center"} gap={1}>
+          {listId?.length > 0 && (
+            <Button
+              variant="contained"
+              onClick={() => setIsOpenAddToCategory(true)}
+              size="small"
+              color="success"
+            >
+              Thêm sản phẩm vào danh mục
+            </Button>
+          )}
+
+          <Button
+            variant="contained"
+            onClick={() => setIsOpenAdd(true)}
+            size="small"
+          >
+            Thêm sản phẩm
+          </Button>
+        </Box>
       </Box>
       <Box mt={4}>
         <DataGrid
@@ -297,6 +355,10 @@ function AProduct() {
           rows={data}
           columns={columns}
           rowHeight={150}
+          onRowSelectionModelChange={(newRowSelectionModel) => {
+            setListId(newRowSelectionModel);
+          }}
+          rowSelectionModel={listId}
         />
       </Box>
       {/* Modal create */}
@@ -747,6 +809,28 @@ function AProduct() {
             )}
           </Grid>
         </Grid>
+      </ModalUpdate>
+
+      {/* Modal add to category*/}
+      <ModalUpdate
+        open={isOpenAddToCategory}
+        title={"Thêm sản phẩm vào danh mục"}
+        handleClose={handleResetAddToCategory}
+        handleOk={handleAddProductToCategory}
+      >
+        <Typography mb={1} fontWeight={600}>
+          Chon danh mục:
+        </Typography>
+        <Select
+          fullWidth
+          value={idCategory}
+          size="small"
+          onChange={(e) => setIdCategory(e.target.value)}
+        >
+          {arrCategory?.map((e) => (
+            <MenuItem value={e?._id}>{e?.name}</MenuItem>
+          ))}
+        </Select>
       </ModalUpdate>
 
       {/* Modal delete */}
