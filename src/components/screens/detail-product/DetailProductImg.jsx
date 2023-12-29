@@ -13,18 +13,18 @@ const MoreImg = styled(Box)({
   },
 });
 
-function DetailProductImg() {
-  const listImg = [
-    "/img/Product3.webp",
-    "/img/DP1.webp",
-    "/img/DP2.webp",
-    "/img/DP3.webp",
-  ];
+function DetailProductImg({ data }) {
+  const [listImg, setListImge] = useState([]);
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    setActive(listImg[0]);
-  }, []);
+    const newData = data?.filter(Boolean);
+    setListImge(newData);
+  }, [data]);
+
+  useEffect(() => {
+    setActive(listImg?.[0]);
+  }, [listImg]);
 
   return (
     <Box>

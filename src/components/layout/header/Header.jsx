@@ -59,8 +59,17 @@ function Header() {
             onClick={() => navigate("/")}
           />
           <Box display={"flex"} alignItems={"center"} gap={4}>
-            {arrCategory?.map((e) => (
+            <Typography
+              color={"white"}
+              fontSize={12}
+              fontWeight={500}
+              onClick={() => navigate("/")}
+            >
+              TRANG CHỦ
+            </Typography>
+            {arrCategory?.map((e, index) => (
               <Typography
+                key={index}
                 color={"white"}
                 fontSize={12}
                 fontWeight={500}

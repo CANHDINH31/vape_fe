@@ -80,16 +80,16 @@ function ProductCard({ item }) {
   const navigate = useNavigate();
 
   return (
-    <Wrapper onClick={() => navigate("/product/1")}>
+    <Wrapper onClick={() => navigate(`/product/${item._id}`)}>
       <WrapImg>
         <Box component={"img"} src={item?.url1} className="img" />
         <Box className={"overlay"}>
           <WrapIcon>
             <HiOutlineEye />
           </WrapIcon>
-          <WrapIcon>
+          {/* <WrapIcon>
             <HiOutlineShoppingBag />
-          </WrapIcon>
+          </WrapIcon> */}
           <WrapIcon>
             <HiOutlineHeart />
           </WrapIcon>

@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { Container, Box, Typography, Grid } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
 import DetailProductImg from "../components/screens/detail-product/DetailProductImg";
 import InfoDetailProduct from "../components/screens/detail-product/InfoDetailProduct";
+import { useParams } from "react-router-dom";
+import { getProductById } from "../utils/api/product";
 
 function DetailProduct() {
+  const { id } = useParams();
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getProductById(id);
+        setData(res?.data);
+      } catch (error) {}
+    };
+    getData();
+    window.scrollTo(0, 0);
+  }, [id]);
+
   return (
     <MainLayout showWarning={false}>
       <Container>
@@ -26,16 +42,18 @@ function DetailProduct() {
               lineHeight={1}
               color={"#222"}
             >
-              OXVA XLIM SQ Pro Kit
+              {data?.name}
             </Typography>
           </Box>
           <Box mt={4}>
             <Grid container spacing={4}>
               <Grid item xs={6} zIndex={2}>
-                <DetailProductImg />
+                <DetailProductImg
+                  data={[data?.url1, data?.url2, data?.url3, data?.url4]}
+                />
               </Grid>
               <Grid item xs={6}>
-                <InfoDetailProduct zIndex1={1} />
+                <InfoDetailProduct zIndex1={1} data={data} />
               </Grid>
             </Grid>
           </Box>
