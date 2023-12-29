@@ -9,12 +9,17 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "./listItems";
+import { Button } from "@mui/material";
+import { IoIosLogOut } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { notify } from "../../../utils/helpers/notify";
+import { useDispatch } from "react-redux";
+import { login, logout } from "../../../utils/redux/userSlice";
 
 const drawerWidth = 240;
 
@@ -65,10 +70,25 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function AdminLayout({ children }) {
+  const { user } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    notify("success", "Tài khoản đã được đăng xuất");
+  };
+
+  React.useEffect(() => {
+    if (user?.role != "1") {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -101,11 +121,14 @@ export default function AdminLayout({ children }) {
             >
               Welcome to Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Button
+              color="error"
+              variant="contained"
+              startIcon={<IoIosLogOut />}
+              onClick={handleLogout}
+            >
+              Đăng xuất
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -113,10 +136,16 @@ export default function AdminLayout({ children }) {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
               px: [1],
             }}
           >
+            <Box
+              component={"img"}
+              src={"/img/Logo.png"}
+              width={60}
+              sx={{ objectFit: "contain" }}
+            />
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

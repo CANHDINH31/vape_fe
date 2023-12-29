@@ -3,10 +3,23 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { BiCategory } from "react-icons/bi";
-import { RiProductHuntLine } from "react-icons/ri";
+import { RiProductHuntLine, RiUserLine } from "react-icons/ri";
+import { IoHomeOutline } from "react-icons/io5";
 
 export const mainListItems = (
   <React.Fragment>
+    <ListItemButton href="/">
+      <ListItemIcon>
+        <IoHomeOutline fontSize={24} />
+      </ListItemIcon>
+      <ListItemText primary="Trang chủ" />
+    </ListItemButton>
+    <ListItemButton href="/admin/user">
+      <ListItemIcon>
+        <RiUserLine fontSize={24} />
+      </ListItemIcon>
+      <ListItemText primary="Người dùng" />
+    </ListItemButton>
     <ListItemButton href="/admin/category">
       <ListItemIcon>
         <BiCategory fontSize={24} />

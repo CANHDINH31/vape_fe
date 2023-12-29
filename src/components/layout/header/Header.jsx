@@ -5,6 +5,7 @@ import {
   Divider,
   TextField,
   Button,
+  Popover,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
@@ -17,8 +18,10 @@ import { listMenu } from "../../../utils/api/category";
 import { create, loginAccount } from "../../../utils/api/user";
 import { notify } from "../../../utils/helpers/notify";
 import { useDispatch } from "react-redux";
-import { login } from "../../../utils/redux/userSlice";
+import { login, logout } from "../../../utils/redux/userSlice";
 import { useSelector } from "react-redux";
+import { IoIosLogOut } from "react-icons/io";
+import { IoSettingsOutline } from "react-icons/io5";
 
 function Header() {
   const navigate = useNavigate();
@@ -27,11 +30,13 @@ function Header() {
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
   const [arrCategory, setArrCategory] = useState([]);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleRegister = async (e) => {
     try {
@@ -55,10 +60,16 @@ function Header() {
       setUsername("");
       setPassword("");
       setIsOpenDrawer(false);
+      setAnchorEl(null);
       notify("success", "Đăng nhập thành công");
     } catch (error) {
       notify("error", error?.response?.data?.message);
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    notify("success", "Tài khoản đã được đăng xuất");
   };
 
   useEffect(() => {
@@ -134,14 +145,60 @@ function Header() {
             <Box display={"flex"} alignItems={"center"} gap={1}>
               <Box width={"1px"} height={20} bgcolor={"#cecece"} />
               {user?.name ? (
-                <Button
-                  variant="contained"
-                  size="small"
-                  color="text"
-                  startIcon={<HiOutlineUser />}
-                >
-                  {user?.name}
-                </Button>
+                <>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    color="text"
+                    startIcon={<HiOutlineUser fontSize={24} />}
+                    onClick={(event) => setAnchorEl(event.currentTarget)}
+                  >
+                    {user?.name}
+                  </Button>
+                  <Popover
+                    sx={{ marginTop: 1 }}
+                    open={Boolean(anchorEl)}
+                    anchorEl={anchorEl}
+                    onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                  >
+                    <Box sx={{ cursor: "pointer" }}>
+                      {user?.role == "1" && (
+                        <>
+                          <Box
+                            display={"flex"}
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
+                            width={150}
+                            py={1}
+                            px={2}
+                            onClick={() => navigate("/admin/user")}
+                          >
+                            <IoSettingsOutline fontSize={24} />
+                            <Typography>Quản trị viên</Typography>
+                          </Box>
+                          <Divider />
+                        </>
+                      )}
+
+                      <Box
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"space-between"}
+                        width={150}
+                        py={1}
+                        px={2}
+                        onClick={handleLogout}
+                      >
+                        <IoIosLogOut fontSize={24} />
+                        <Typography>Đăng xuất</Typography>
+                      </Box>
+                    </Box>
+                  </Popover>
+                </>
               ) : (
                 <HiOutlineUser
                   fontSize={24}

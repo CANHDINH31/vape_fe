@@ -7,6 +7,7 @@ import Category from "../pages/Category";
 import ShoppingCart from "../pages/ShoppingCart";
 import AProduct from "../pages/admin/AProduct";
 import ACategory from "../pages/admin/ACategory";
+import AUser from "../pages/admin/AUser";
 
 export const listRouter = [
   { path: "/", element: <Home /> },
@@ -18,5 +19,6 @@ export const listRouter = [
   { path: "/my-favourite", element: <MyFavourite /> },
   { path: "/admin/category", element: <ACategory /> },
   { path: "/admin/product", element: <AProduct /> },
+  { path: "/admin/user", element: <AUser /> },
   { path: "*", element: <Home /> },
 ];
