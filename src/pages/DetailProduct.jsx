@@ -5,11 +5,17 @@ import { IoIosArrowForward } from "react-icons/io";
 import DetailProductImg from "../components/screens/detail-product/DetailProductImg";
 import InfoDetailProduct from "../components/screens/detail-product/InfoDetailProduct";
 import { useParams } from "react-router-dom";
-import { addViews, getProductById } from "../utils/api/product";
+import {
+  addViews,
+  getProductById,
+  listRelatedVideo,
+} from "../utils/api/product";
+import ProductCard from "../../src/components/screens/product/ProductCard";
 
 function DetailProduct() {
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [arrRelatedVideo, setArrRelatedVideo] = useState([]);
 
   useEffect(() => {
     const handleAddViews = async () => {
@@ -20,16 +26,30 @@ function DetailProduct() {
       }
     };
 
-    handleAddViews();
-
     const getData = async () => {
       try {
         const res = await getProductById(id);
         setData(res?.data);
       } catch (error) {}
     };
+
+    const getRelatedVideo = async () => {
+      try {
+        const res = await listRelatedVideo(id);
+        setArrRelatedVideo(res?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getData();
-    window.scrollTo(0, 0);
+    handleAddViews();
+    getRelatedVideo();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [id]);
 
   return (
@@ -65,6 +85,23 @@ function DetailProduct() {
               <Grid item xs={6}>
                 <InfoDetailProduct zIndex1={1} data={data} />
               </Grid>
+            </Grid>
+          </Box>
+          <Typography
+            mt={8}
+            textAlign={"center"}
+            fontWeight={"bold"}
+            fontSize={24}
+          >
+            SẢN PHẨM LIÊN QUAN
+          </Typography>
+          <Box mt={4}>
+            <Grid container spacing={4}>
+              {arrRelatedVideo.map((e) => (
+                <Grid item xs={4} key={e?._id}>
+                  <ProductCard item={e} />
+                </Grid>
+              ))}
             </Grid>
           </Box>
         </Box>

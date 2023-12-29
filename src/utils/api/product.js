@@ -19,3 +19,6 @@ export const getProductById = async (id) =>
 
 export const listTopView = async () =>
   await request.get("/api/product/top-view");
+
+export const listRelatedVideo = async (id) =>
+  await request.get("/api/product/related/" + id);
