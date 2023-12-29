@@ -7,3 +7,6 @@ export const listProduct = async () => await request.get("/api/product");
 
 export const deleteProduct = async (id) =>
   await request.delete("/api/product/" + id);
+
+export const updateProduct = async (id, payload) =>
+  await request.patch("/api/product/" + id, payload);

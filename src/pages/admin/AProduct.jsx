@@ -6,7 +6,12 @@ import ConfirmDelete from "../../components/common/ConfirmDelete";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { notify } from "../../utils/helpers/notify";
-import { create, deleteProduct, listProduct } from "../../utils/api/product";
+import {
+  create,
+  deleteProduct,
+  listProduct,
+  updateProduct,
+} from "../../utils/api/product";
 import { DataGrid } from "@mui/x-data-grid";
 
 function AProduct() {
@@ -15,6 +20,7 @@ function AProduct() {
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
   const [idDelete, setIdDelete] = useState("");
+  const [idUpdate, setIdUpdate] = useState("");
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -169,6 +175,21 @@ function AProduct() {
     setUrl4("");
   };
 
+  const handleResetUpdate = () => {
+    setIsOpenUpdate(false);
+    setIdUpdate("");
+    setName("");
+    setPrice(0);
+    setDescription("");
+    setNameType("");
+    setNumber(0);
+    setTypes("");
+    setUrl1("");
+    setUrl2("");
+    setUrl3("");
+    setUrl4("");
+  };
+
   const handleAddProduct = async () => {
     try {
       await create({
@@ -189,6 +210,28 @@ function AProduct() {
     handleReset();
   };
 
+  const handleUpdateProduct = async () => {
+    try {
+      await updateProduct(idUpdate, {
+        name,
+        price: Number(price),
+        number: Number(number),
+        description,
+        nameType,
+        types: types?.split(","),
+        url1,
+        url2,
+        url3,
+        url4,
+      });
+      notify("success", "Cập nhật sản phẩm thành công");
+      getListProduct();
+    } catch (error) {
+      console.log(error);
+    }
+    handleResetUpdate();
+  };
+
   const getListProduct = async () => {
     try {
       const res = await listProduct();
@@ -204,7 +247,21 @@ function AProduct() {
   };
 
   const handleOpenConfirmUpdate = (data) => {
-    console.log(data);
+    setName(data?.name);
+    setIdUpdate(data?.id);
+    setName(data?.name);
+    setNameType(data?.nameType);
+    setNumber(data?.number || 0);
+    setPrice(data?.price || 0);
+    setTypes(data?.types?.join(","));
+    setDescription(data?.description);
+
+    setUrl1(data?.url1);
+    setUrl2(data?.url2);
+    setUrl3(data?.url3);
+    setUrl4(data?.url4);
+
+    setIsOpenUpdate(true);
   };
 
   const handleDeleteProduct = async () => {
@@ -467,13 +524,13 @@ function AProduct() {
         </Grid>
       </ModalUpdate>
 
-      {/* Modal create */}
+      {/* Modal update */}
       <ModalUpdate
-        open={isOpenAdd}
-        title={"Thêm sản phẩm"}
+        open={isOpenUpdate}
+        title={"Cập nhật sản phẩm"}
         maxWidth={"lg"}
-        handleClose={handleReset}
-        handleOk={handleAddProduct}
+        handleClose={handleResetUpdate}
+        handleOk={handleUpdateProduct}
       >
         <Grid container spacing={4}>
           <Grid item xs={6}>
