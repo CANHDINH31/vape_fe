@@ -5,8 +5,13 @@ import {
   HiOutlineHeart,
   HiOutlineEye,
 } from "react-icons/hi2";
+import { HiHeart } from "react-icons/hi";
 
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { notify } from "../../../utils/helpers/notify";
+import { favourite } from "../../../utils/redux/userSlice";
+import { updateUser } from "../../../utils/api/user";
 
 const Wrapper = styled(Box)({
   position: "relative",
@@ -78,9 +83,34 @@ const WrapIcon = styled(Box)({
 
 function ProductCard({ item, isTop = false }) {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state?.user);
+  const dispatch = useDispatch();
+
+  const handleFavourite = async (e, item) => {
+    e.stopPropagation();
+    if (!user) {
+      notify("warn", "Bạn phải đăng nhập để sử dụng chức năng này");
+    } else {
+      let listIdFavourite = user?.favourite?.map((i) => i?._id);
+      const index = user?.favourite?.findIndex((i) => i?._id === item?._id);
+      if (index > -1) {
+        listIdFavourite = listIdFavourite?.filter((i) => i?._id != item?._id);
+        notify("success", "Xóa khỏi yêu thích thành công");
+      } else {
+        listIdFavourite.push(item?._id);
+        notify("success", "Thêm vào yêu thích thành công");
+      }
+      try {
+        await updateUser(user?._id, { favourite: listIdFavourite });
+        dispatch(favourite(item));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
-    <Wrapper onClick={() => navigate(`/product/${item._id}`)}>
+    <Wrapper onClick={() => navigate(`/product/${item?._id}`)}>
       <WrapImg>
         <Box component={"img"} src={item?.url1} className="img" />
         <Box className={"overlay"}>
@@ -90,12 +120,12 @@ function ProductCard({ item, isTop = false }) {
           {/* <WrapIcon>
             <HiOutlineShoppingBag />
           </WrapIcon> */}
-          <WrapIcon
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <HiOutlineHeart />
+          <WrapIcon onClick={(e) => handleFavourite(e, item)}>
+            {user?.favourite?.map((e) => e?._id)?.includes(item?._id) ? (
+              <HiHeart width={28} color="red" />
+            ) : (
+              <HiOutlineHeart width={28} />
+            )}
           </WrapIcon>
         </Box>
       </WrapImg>

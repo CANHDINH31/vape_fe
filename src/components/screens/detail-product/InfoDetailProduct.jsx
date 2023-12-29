@@ -4,6 +4,12 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { MdOutlineAttachMoney } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { notify } from "../../../utils/helpers/notify";
+import { favourite } from "../../../utils/redux/userSlice";
+import { FaHeart } from "react-icons/fa";
+import { updateUser } from "../../../utils/api/user";
 
 const AmountWrap = styled(Box)({
   display: "flex",
@@ -38,9 +44,35 @@ const WrapIcon = styled(Box)({
 });
 
 function InfoDetailProduct({ data }) {
+  const { user } = useSelector((state) => state?.user);
+  const dispatch = useDispatch();
+
   const [amount, setAmount] = useState(1);
   const [active, setActive] = useState("");
   const [listType, setListType] = useState([]);
+
+  const handleFavourite = async (e, item) => {
+    e.stopPropagation();
+    if (!user) {
+      notify("warn", "Bạn phải đăng nhập để sử dụng chức năng này");
+    } else {
+      let listIdFavourite = user?.favourite?.map((i) => i?._id);
+      const index = user?.favourite?.findIndex((i) => i?._id === item?._id);
+      if (index > -1) {
+        listIdFavourite = listIdFavourite?.filter((i) => i?._id != item?._id);
+        notify("success", "Xóa khỏi yêu thích thành công");
+      } else {
+        listIdFavourite.push(item?._id);
+        notify("success", "Thêm vào yêu thích thành công");
+      }
+      try {
+        await updateUser(user?._id, { favourite: listIdFavourite });
+        dispatch(favourite(item));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     setActive(listType?.[0]);
@@ -165,9 +197,17 @@ function InfoDetailProduct({ data }) {
         >
           ART TO CART
         </Button> */}
-        <WrapIcon>
-          <CiHeart fontSize={24} />
-        </WrapIcon>
+        <Box onClick={(e) => handleFavourite(e, data)}>
+          {user?.favourite?.map((e) => e?._id)?.includes(data?._id) ? (
+            <WrapIcon sx={{ borderColor: "red" }}>
+              <FaHeart width={24} color="red" />
+            </WrapIcon>
+          ) : (
+            <WrapIcon>
+              <CiHeart width={24} />
+            </WrapIcon>
+          )}
+        </Box>
       </Box>
     </Box>
   );

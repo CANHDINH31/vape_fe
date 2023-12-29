@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   Popover,
+  Badge,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
@@ -70,6 +71,14 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     notify("success", "Tài khoản đã được đăng xuất");
+  };
+
+  const handleFavourite = () => {
+    if (!user) {
+      notify("warn", "Bạn phải đăng nhập để sử dụng chức năng này");
+    } else {
+      navigate("/my-favourite");
+    }
   };
 
   useEffect(() => {
@@ -140,7 +149,13 @@ function Header() {
           >
             {/* <HiOutlineShoppingBag fontSize={24} />
             <Box width={"1px"} height={20} bgcolor={"#cecece"} /> */}
-            <HiOutlineHeart fontSize={24} />
+            <Badge
+              badgeContent={user?.favourite?.length}
+              color="info"
+              onClick={handleFavourite}
+            >
+              <HiOutlineHeart fontSize={24} />
+            </Badge>
 
             <Box display={"flex"} alignItems={"center"} gap={1}>
               <Box width={"1px"} height={20} bgcolor={"#cecece"} />

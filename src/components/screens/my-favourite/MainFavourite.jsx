@@ -1,8 +1,19 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import ProductCard from "../product/ProductCard";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function MainFavourite() {
+  const { user } = useSelector((state) => state?.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !user && navigate("/");
+  }, [user]);
+
+  console.log(user);
+
   return (
     <Box>
       <Typography textAlign={"center"} fontWeight={"bold"} fontSize={24}>
@@ -10,21 +21,11 @@ function MainFavourite() {
       </Typography>
       <Box mt={4}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={3}>
-            <ProductCard />
-          </Grid>
+          {user?.favourite?.map((item) => (
+            <Grid item xs={3} key={item?._id}>
+              <ProductCard item={item} />
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>
