@@ -6,13 +6,15 @@ import Footer from "./footer/Footer";
 import { useNavigate } from "react-router-dom";
 import ListContact from "./contact/ListContact";
 import ScrollToTop from "./ScrollToTop";
+import { useSelector } from "react-redux";
 
 function MainLayout({ children, showWarning = true }) {
   const naviagte = useNavigate();
+  const { user } = useSelector((state) => state?.user);
 
   useEffect(() => {
     const isVerifyAge = sessionStorage.getItem("verifyAge");
-    if (!isVerifyAge) {
+    if (!isVerifyAge && !user?.name) {
       naviagte("/verify-age");
     }
   }, []);

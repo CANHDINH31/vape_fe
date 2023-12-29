@@ -14,11 +14,16 @@ import {
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { listMenu } from "../../../utils/api/category";
-import { create } from "../../../utils/api/user";
+import { create, loginAccount } from "../../../utils/api/user";
 import { notify } from "../../../utils/helpers/notify";
+import { useDispatch } from "react-redux";
+import { login } from "../../../utils/redux/userSlice";
+import { useSelector } from "react-redux";
 
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.user);
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
   const [arrCategory, setArrCategory] = useState([]);
@@ -37,6 +42,20 @@ function Header() {
       setUsername("");
       setPassword("");
       notify("success", "Đăng kí tài khoản thành công");
+    } catch (error) {
+      notify("error", error?.response?.data?.message);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await loginAccount({ username, password });
+      dispatch(login(res.data));
+      setUsername("");
+      setPassword("");
+      setIsOpenDrawer(false);
+      notify("success", "Đăng nhập thành công");
     } catch (error) {
       notify("error", error?.response?.data?.message);
     }
@@ -111,11 +130,25 @@ function Header() {
             {/* <HiOutlineShoppingBag fontSize={24} />
             <Box width={"1px"} height={20} bgcolor={"#cecece"} /> */}
             <HiOutlineHeart fontSize={24} />
-            <Box width={"1px"} height={20} bgcolor={"#cecece"} />
-            <HiOutlineUser
-              fontSize={24}
-              onClick={() => setIsOpenDrawer(true)}
-            />
+
+            <Box display={"flex"} alignItems={"center"} gap={1}>
+              <Box width={"1px"} height={20} bgcolor={"#cecece"} />
+              {user?.name ? (
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="text"
+                  startIcon={<HiOutlineUser />}
+                >
+                  {user?.name}
+                </Button>
+              ) : (
+                <HiOutlineUser
+                  fontSize={24}
+                  onClick={() => setIsOpenDrawer(true)}
+                />
+              )}
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -128,7 +161,7 @@ function Header() {
         <Box
           sx={{ width: "20vw" }}
           component={"form"}
-          onSubmit={!isLogin ? handleRegister : ""}
+          onSubmit={!isLogin ? handleRegister : handleLogin}
         >
           <Box py={2} px={1}>
             <Typography fontSize={18} fontWeight={600}>
