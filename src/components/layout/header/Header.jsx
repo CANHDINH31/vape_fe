@@ -14,12 +14,33 @@ import {
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { listMenu } from "../../../utils/api/category";
+import { create } from "../../../utils/api/user";
+import { notify } from "../../../utils/helpers/notify";
 
 function Header() {
   const navigate = useNavigate();
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
   const [arrCategory, setArrCategory] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleRegister = async (e) => {
+    try {
+      e.preventDefault();
+      await create({ name, password, username });
+      setIsLogin(true);
+      setName("");
+      setUsername("");
+      setPassword("");
+      notify("success", "Đăng kí tài khoản thành công");
+    } catch (error) {
+      notify("error", error?.response?.data?.message);
+    }
+  };
 
   useEffect(() => {
     const getListCategory = async () => {
@@ -104,35 +125,95 @@ function Header() {
         open={isOpenDrawer}
         onClose={() => setIsOpenDrawer(false)}
       >
-        <Box sx={{ width: "20vw" }}>
+        <Box
+          sx={{ width: "20vw" }}
+          component={"form"}
+          onSubmit={!isLogin ? handleRegister : ""}
+        >
           <Box py={2} px={1}>
             <Typography fontSize={18} fontWeight={600}>
-              REGISTER
+              {isLogin ? "LOGIN" : "REGISTER"}
             </Typography>
           </Box>
           <Divider />
           <Box px={1} py={4}>
-            <Box>
-              <TextField fullWidth size="medium" label="Họ và tên" />
+            {!isLogin && (
+              <Box>
+                <TextField
+                  fullWidth
+                  size="medium"
+                  label="Họ và tên"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </Box>
+            )}
+
+            <Box mt={4}>
+              <TextField
+                fullWidth
+                size="medium"
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
             </Box>
             <Box mt={4}>
-              <TextField fullWidth size="medium" label="Username" />
+              <TextField
+                fullWidth
+                size="medium"
+                label="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                type="password"
+              />
             </Box>
             <Box mt={4}>
-              <TextField fullWidth size="medium" label="Password" />
-            </Box>
-            <Box mt={4}>
-              <TextField fullWidth size="medium" label="Retype Password" />
-            </Box>
-            <Box mt={4}>
-              <Button variant="contained" color="error" fullWidth size="medium">
-                Register
-              </Button>
+              {!isLogin ? (
+                <Button
+                  variant="contained"
+                  color="error"
+                  fullWidth
+                  size="large"
+                  type="submit"
+                >
+                  Register
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="error"
+                  fullWidth
+                  size="large"
+                  type="submit"
+                >
+                  Login
+                </Button>
+              )}
             </Box>
             <Box mt={4} sx={{ cursor: "pointer" }} textAlign={"center"}>
-              <Typography fontSize={14} fontWeight={500}>
-                Already have an account? Login here
-              </Typography>
+              {!isLogin ? (
+                <Typography
+                  fontSize={14}
+                  fontWeight={500}
+                  color={"primary"}
+                  onClick={() => setIsLogin(!isLogin)}
+                >
+                  Already have an account? Login here
+                </Typography>
+              ) : (
+                <Typography
+                  fontSize={14}
+                  fontWeight={500}
+                  color={"primary"}
+                  onClick={() => setIsLogin(!isLogin)}
+                >
+                  New Customer? Register here
+                </Typography>
+              )}
             </Box>
           </Box>
         </Box>
