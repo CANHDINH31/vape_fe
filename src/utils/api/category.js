@@ -4,6 +4,7 @@ export const create = async (payload) =>
   await request.post("/api/category", payload);
 
 export const listCategory = async () => await request.get("/api/category");
+export const listMenu = async () => await request.get("/api/category/menu");
 
 export const getCategoryById = async (id) =>
   await request.get("/api/category/" + id);

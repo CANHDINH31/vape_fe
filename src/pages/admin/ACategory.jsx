@@ -16,6 +16,7 @@ import ConfirmDelete from "../../components/common/ConfirmDelete";
 function ACategory() {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [name, setName] = useState("");
+  const [displayOrder, setDisplayOrder] = useState(0);
   const [data, setData] = useState([]);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
@@ -26,17 +27,18 @@ function ACategory() {
 
   const columns = [
     { field: "index", headerName: "Số thứ tự", width: 200 },
-    { field: "name", headerName: "Tên ", width: 300 },
+    { field: "name", headerName: "Tên ", width: 250 },
+    { field: "displayOrder", headerName: "Vị trí hiển thị", width: 250 },
     {
       field: "proudct",
       headerName: "Số lượng sản phẩm",
-      width: 300,
+      width: 250,
       renderCell: (params) => params?.row?.product?.length,
     },
     {
       field: "",
       headerName: "Hành động",
-      width: 300,
+      width: 250,
       renderCell: (params) => (
         <Box display={"flex"} gap={1}>
           <Button
@@ -75,6 +77,7 @@ function ACategory() {
       ),
     },
     { field: "name", headerName: "Tên ", width: 300 },
+
     {
       field: "",
       headerName: "Hành động",
@@ -99,6 +102,7 @@ function ACategory() {
 
   const handleOpenConfirmUpdate = (data) => {
     setName(data?.name);
+    setDisplayOrder(data?.displayOrder);
     setIdUpdate(data?.id);
     setProduct(data?.product?.map((e) => ({ ...e, id: e?._id })));
     setIsOpenUpdate(true);
@@ -109,12 +113,13 @@ function ACategory() {
     setIdUpdate("");
     setProduct([]);
     setName("");
+    setDisplayOrder(0);
   };
 
   const hanleCreateCategory = async () => {
     try {
       if (name) {
-        await create({ name });
+        await create({ name, displayOrder });
         notify("success", "Thêm danh mục thành công");
       }
       getListCategory();
@@ -127,6 +132,7 @@ function ACategory() {
       if (name) {
         await updateCategory(idUpdate, {
           name,
+          displayOrder,
           product: product?.map((e) => e?._id),
         });
         notify("success", "Cập nhật danh mục thành công");
@@ -138,6 +144,7 @@ function ACategory() {
 
   const handleReset = () => {
     setIsOpenAdd(false);
+    setDisplayOrder(0);
     setName("");
   };
 
@@ -202,6 +209,15 @@ function ACategory() {
           fullWidth
           size="small"
         />
+
+        <Typography mt={2}>Vị trí hiển thị:</Typography>
+        <TextField
+          value={displayOrder}
+          onChange={(e) => setDisplayOrder(e.target.value)}
+          fullWidth
+          size="small"
+          type="number"
+        />
       </ModalUpdate>
 
       {/* <Modal update */}
@@ -216,6 +232,14 @@ function ACategory() {
         <TextField
           value={name}
           onChange={(e) => setName(e.target.value)}
+          fullWidth
+          size="small"
+        />
+
+        <Typography mt={1}>Vị trí hiển thị:</Typography>
+        <TextField
+          value={displayOrder}
+          onChange={(e) => setDisplayOrder(e.target.value)}
           fullWidth
           size="small"
         />

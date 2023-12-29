@@ -13,7 +13,7 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { listCategory } from "../../../utils/api/category";
+import { listMenu } from "../../../utils/api/category";
 
 function Header() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Header() {
 
   useEffect(() => {
     const getListCategory = async () => {
-      const res = await listCategory();
+      const res = await listMenu();
       setArrCategory(res.data);
     };
     getListCategory();
