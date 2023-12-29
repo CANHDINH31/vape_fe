@@ -42,7 +42,7 @@ function AProduct() {
       renderCell: (params) => (
         <Box
           component={"img"}
-          src={params?.row?.url1}
+          src={params?.row?.url1 || "/img/noImage.jpg"}
           width={120}
           height={120}
           sx={{ objectFit: "cover", borderRadius: 1 }}
