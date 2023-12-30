@@ -2,7 +2,7 @@ import axios from "axios";
 let baseURL;
 
 if (process.env.NODE_ENV === "production") {
-  baseURL = "https://busy-ruby-tuna-ring.cyclic.app";
+  baseURL = "https://fine-pink-gosling-tux.cyclic.app";
 } else {
   baseURL = "http://localhost:8000";
 }
