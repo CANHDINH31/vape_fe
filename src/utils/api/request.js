@@ -1,5 +1,11 @@
 import axios from "axios";
-const baseURL = "http://localhost:8000";
+let baseURL;
+
+if (process.env.NODE_ENV === "production") {
+  baseURL = "https://busy-ruby-tuna-ring.cyclic.app";
+} else {
+  baseURL = "http://localhost:8000";
+}
 
 export const request = axios.create({
   baseURL,
