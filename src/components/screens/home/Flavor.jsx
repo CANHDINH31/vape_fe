@@ -43,7 +43,7 @@ function Flavor() {
       <Typography
         textAlign={"center"}
         color={"white"}
-        fontSize={"3.5rem"}
+        fontSize={{ xs: "1.8rem", sm: "2.6rem" }}
         lineHeight={1}
         fontWeight={"bold"}
         data-aos="fade-up"
@@ -54,7 +54,7 @@ function Flavor() {
         color={"white"}
         textAlign={"center"}
         lineHeight={2}
-        fontSize={20}
+        fontSize={{ xs: 16, sm: 20 }}
         fontWeight={500}
         data-aos="fade-up"
       >
@@ -62,10 +62,20 @@ function Flavor() {
       </Typography>
       <Box mt={8}>
         <SwipperCustom
-          slidesPerView={4}
+          breakpoints={{
+            640: {
+              width: 640,
+              slidesPerView: 1,
+            },
+            768: {
+              width: 768,
+              slidesPerView: 2,
+            },
+          }}
           spaceBetween={30}
           centeredSlides={true}
           loop={true}
+          br
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
