@@ -20,7 +20,7 @@ function MainLayout({ children, showWarning = true }) {
   }, []);
 
   return (
-    <Box>
+    <Box width={"100%"} sx={{ overflowX: "hidden" }}>
       {showWarning && <Warning />}
       <Header />
       <Box minHeight={"70vh"}>{children}</Box>
