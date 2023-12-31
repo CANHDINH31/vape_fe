@@ -9,7 +9,7 @@ function Magic() {
       <Box
         component={"img"}
         src={isMoblie ? "/img/MagicMB.webp" : "/img/Magic.webp"}
-        height={"90vh"}
+        height={isMoblie ? "80vh" : "90vh"}
         width={"100vw"}
         sx={{ objectFit: "cover" }}
         display={"block"}
