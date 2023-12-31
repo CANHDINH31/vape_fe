@@ -110,7 +110,12 @@ function ProductCard({ item, isTop = false }) {
   };
 
   return (
-    <Wrapper onClick={() => navigate(`/product/${item?._id}`)}>
+    <Wrapper
+      onClick={() => navigate(`/product/${item?._id}`)}
+      display={{ xs: "flex", sm: "unset" }}
+      flexDirection={{ xs: "column", sm: "unset" }}
+      alignItems={{ xs: "center", sm: "unset" }}
+    >
       <WrapImg>
         <Box component={"img"} src={item?.url1} className="img" />
         <Box className={"overlay"}>
