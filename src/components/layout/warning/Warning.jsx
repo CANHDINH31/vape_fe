@@ -1,19 +1,25 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import React from "react";
+import { theme } from "../../../utils/theme";
+
+const Text = styled(Typography)({
+  textAlign: "center",
+  fontSize: "0.8rem",
+  lineHeight: 1,
+  fontWeight: 700,
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "1.2rem",
+  },
+});
 
 function Warning() {
   return (
-    <Box paddingY={2}>
-      <Typography
-        textAlign={"center"}
-        fontSize={"1.2rem"}
-        lineHeight={1}
-        fontWeight={700}
-      >
-        WARNING: This product contains
+    <Box padding={2}>
+      <Text>
+        WARNING: This product contains nicotine.
         <br />
-        nicotine. Nicotine is an addictive chemical.
-      </Typography>
+        Nicotine is an addictive chemical.
+      </Text>
     </Box>
   );
 }
