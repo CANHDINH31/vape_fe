@@ -7,6 +7,7 @@ import {
   Button,
   Popover,
   Badge,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
@@ -29,6 +30,8 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.user);
+
+  const isMoblie = useMediaQuery("(max-width:600px)");
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
   const [arrCategory, setArrCategory] = useState([]);
@@ -92,7 +95,7 @@ function Header() {
 
   return (
     <>
-      {false && (
+      {!isMoblie ? (
         <Box
           bgcolor={"#000"}
           display={"flex"}
@@ -226,41 +229,41 @@ function Header() {
             </Box>
           </Box>
         </Box>
-      )}
-
-      <Box
-        bgcolor={"#000"}
-        display={"flex"}
-        justifyContent={"space-between"}
-        py={1}
-        alignItems={"center"}
-        sx={{ cursor: "pointer" }}
-        position={"sticky"}
-        top={0}
-        left={0}
-        right={0}
-        zIndex={999}
-        borderTop={"1px solid rgb(61, 61, 61)"}
-        borderBottom={"1px solid rgb(61, 61, 61)"}
-        paddingX={1}
-      >
-        <IoIosList fontSize={38} color={"white"} />
+      ) : (
         <Box
-          component={"img"}
-          src={"/img/Logo.png"}
-          height={60}
-          sx={{ objectFit: "contain" }}
-          onClick={() => navigate("/")}
-        />
-
-        <Badge
-          badgeContent={user?.favourite?.length}
-          color="info"
-          onClick={handleFavourite}
+          bgcolor={"#000"}
+          display={"flex"}
+          justifyContent={"space-between"}
+          py={1}
+          alignItems={"center"}
+          sx={{ cursor: "pointer" }}
+          position={"sticky"}
+          top={0}
+          left={0}
+          right={0}
+          zIndex={999}
+          borderTop={"1px solid rgb(61, 61, 61)"}
+          borderBottom={"1px solid rgb(61, 61, 61)"}
+          paddingX={1}
         >
-          <HiOutlineHeart fontSize={38} color={"white"} />
-        </Badge>
-      </Box>
+          <IoIosList fontSize={38} color={"white"} />
+          <Box
+            component={"img"}
+            src={"/img/Logo.png"}
+            height={60}
+            sx={{ objectFit: "contain" }}
+            onClick={() => navigate("/")}
+          />
+
+          <Badge
+            badgeContent={user?.favourite?.length}
+            color="info"
+            onClick={handleFavourite}
+          >
+            <HiOutlineHeart fontSize={38} color={"white"} />
+          </Badge>
+        </Box>
+      )}
 
       <Drawer
         anchor={"right"}
