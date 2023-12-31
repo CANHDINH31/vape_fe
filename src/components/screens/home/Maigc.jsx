@@ -17,7 +17,7 @@ function Magic() {
       <Box
         position={"absolute"}
         top={isMoblie ? "18%" : "50%"}
-        left={isMoblie ? "unset" : "10%"}
+        right={isMoblie ? "unset" : "10%"}
         width={isMoblie ? "100%" : "unset"}
         sx={{ transform: "translateY(-50%)" }}
       >
@@ -29,7 +29,10 @@ function Magic() {
             data-aos="fade-up"
           >
             Magic in Every
-            <Box component={"span"} color={"white"} fontSize={"4.5rem"}></Box>
+            <Box component={"span"} color={"white"} fontSize={"4.5rem"}>
+              {" "}
+              Cloud.
+            </Box>
           </Typography>
         ) : (
           <>

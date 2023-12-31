@@ -1,7 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 
 function Drop() {
+  const isMoblie = useMediaQuery("(max-width:600px)");
+
   return (
     <Box position={"relative"}>
       <Box
@@ -9,9 +11,9 @@ function Drop() {
         src={
           "https://cdn.shopify.com/videos/c/o/v/a7466b8fd90745788a78ef2d9515df01.mp4"
         }
-        height={"90vh"}
+        height={isMoblie ? "80vh" : "90vh"}
         width={"100vw"}
-        sx={{ objectFit: "cover" }}
+        sx={{ objectFit: "cover", objectPosition: { xs: "77%", sm: "unset" } }}
         display={"block"}
         autoPlay={true}
         loop
@@ -19,13 +21,15 @@ function Drop() {
       />
       <Box
         position={"absolute"}
-        top={"50%"}
-        left={"10%"}
+        top={isMoblie ? "18%" : "50%"}
+        left={isMoblie ? "unset" : "10%"}
+        width={isMoblie ? "100%" : "unset"}
         sx={{ transform: "translateY(-50%)" }}
+        textAlign={isMoblie ? "center" : "unset"}
       >
         <Typography
-          fontSize={"3rem"}
-          lineHeight={1}
+          fontSize={{ xs: "1.8rem", sm: "2.6rem" }}
+          lineHeight={{ xs: 1.7, sm: 1 }}
           fontWeight={"bold"}
           color={"white"}
           data-aos="fade-up"
@@ -33,7 +37,7 @@ function Drop() {
           Professionalism in{" "}
         </Typography>
         <Typography
-          fontSize={"3rem"}
+          fontSize={{ xs: "1.8rem", sm: "2.6rem" }}
           lineHeight={1}
           fontWeight={"bold"}
           color={"white"}
@@ -43,7 +47,7 @@ function Drop() {
           <Box
             component={"span"}
             color={"white"}
-            fontSize={"4.5rem"}
+            fontSize={{ xs: "2.5rem", sm: "3rem" }}
             sx={{
               backgroundImage: "linear-gradient(135deg,#ffcb41,#ff7f00)",
               "background-clip": "text",
@@ -54,20 +58,38 @@ function Drop() {
             Drop
           </Box>
         </Typography>
-        <Typography
-          fontSize={20}
-          lineHeight={1.3}
-          mt={"2rem"}
-          color={"white"}
-          fontWeight={500}
-          data-aos="fade-up"
-        >
-          Using high-quality and natural ingredients, OX
-          <br />
-          PASSION has been persevering in production with
-          <br />
-          care, ensuring absolute safety in every puff.
-        </Typography>
+        {!isMoblie ? (
+          <Typography
+            fontSize={20}
+            lineHeight={1.3}
+            mt={"2rem"}
+            color={"white"}
+            fontWeight={500}
+            data-aos="fade-up"
+          >
+            Using high-quality and natural ingredients, OX
+            <br />
+            PASSION has been persevering in production with
+            <br />
+            care, ensuring absolute safety in every puff.
+          </Typography>
+        ) : (
+          <Typography
+            textAlign={"center"}
+            mt={3}
+            fontSize={{ xs: 12, sm: 20 }}
+            whiteSpace={"normal"}
+            fontWeight={500}
+            data-aos="fade-up"
+            color={"white"}
+          >
+            Using high-quality and natural ingredients, OX
+            <br />
+            PASSION has been persevering in production with
+            <br />
+            care, ensuring absolute safety in every puff.
+          </Typography>
+        )}
       </Box>
     </Box>
   );
