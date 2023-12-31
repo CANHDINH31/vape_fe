@@ -18,6 +18,7 @@ function Drop() {
         autoPlay={true}
         loop
         controls={false}
+        playsInline
       />
       <Box
         position={"absolute"}
