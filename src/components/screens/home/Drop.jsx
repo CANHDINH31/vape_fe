@@ -17,7 +17,7 @@ function Drop() {
         display={"block"}
         autoPlay={true}
         loop
-        muted
+        controls={false}
       />
       <Box
         position={"absolute"}
