@@ -77,12 +77,12 @@ function DetailProduct() {
           </Box>
           <Box mt={4}>
             <Grid container spacing={4}>
-              <Grid item xs={6} zIndex={2}>
+              <Grid item xs={12} sm={12} md={6} lg={6} zIndex={2}>
                 <DetailProductImg
                   data={[data?.url1, data?.url2, data?.url3, data?.url4]}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <InfoDetailProduct zIndex1={1} data={data} />
               </Grid>
             </Grid>
@@ -98,7 +98,7 @@ function DetailProduct() {
           <Box mt={4}>
             <Grid container spacing={4}>
               {arrRelatedVideo.map((e) => (
-                <Grid item xs={4} key={e?._id}>
+                <Grid item xs={12} sm={12} md={6} lg={6} key={e?._id}>
                   <ProductCard item={e} />
                 </Grid>
               ))}
