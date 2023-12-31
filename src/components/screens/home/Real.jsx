@@ -16,7 +16,8 @@ function Real() {
       <Box
         position={"absolute"}
         top={isMoblie ? "18%" : "50%"}
-        left={"10%"}
+        left={isMoblie ? "unset" : "10%"}
+        width={isMoblie ? "100%" : "unset"}
         sx={{ transform: "translateY(-50%)" }}
       >
         <Typography
