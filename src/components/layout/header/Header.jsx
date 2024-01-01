@@ -24,9 +24,11 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "../../../utils/redux/userSlice";
 import { useSelector } from "react-redux";
 import { IoIosLogOut } from "react-icons/io";
-import { IoSettingsOutline, IoHomeOutline } from "react-icons/io5";
+import { IoSettingsOutline, IoHomeOutline, IoHeart } from "react-icons/io5";
 import { IoIosList, IoIosLogIn } from "react-icons/io";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { FaRegUserCircle } from "react-icons/fa";
+import { LuUserCheck } from "react-icons/lu";
 
 const MenuItem = styled(Box)({
   padding: 16,
@@ -398,7 +400,7 @@ function Header() {
         </Box>
       </Drawer>
 
-      {/* DRAWER AUTH */}
+      {/* DRAWER MB */}
       <Drawer
         anchor={"left"}
         open={isOpenDrawerMB}
@@ -421,6 +423,32 @@ function Header() {
               <CloseOutlinedIcon sx={{ color: "red" }} />
             </Box>
           </Box>
+          {user?.name && (
+            <Box
+              p={2}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Box display={"flex"} alignItems={"center"} gap={1}>
+                <LuUserCheck fontSize={24} />
+                <Typography fontWeight={500} fontSize={14}>
+                  {user?.name.toUpperCase()}
+                </Typography>
+              </Box>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => {
+                  setIsOpenDrawerMB(false);
+                  handleLogout();
+                }}
+              >
+                Đăng xuất
+              </Button>
+            </Box>
+          )}
+
           <MenuItem borderTop={"1px solid rgba(34,34,34,0.2)"}>
             <IoHomeOutline fontSize={24} />
             <Typography
@@ -444,23 +472,39 @@ function Header() {
               </Typography>
             </MenuItem>
           ))}
-          <Box p={2}>
-            {user ? (
-              <Button
-                variant="contained"
-                fullWidth
-                color="error"
-                onClick={() => {
-                  setIsOpenDrawerMB(false);
-                  handleLogout();
-                }}
-                startIcon={<IoIosLogIn />}
+
+          {user?.role == "1" && (
+            <MenuItem>
+              <IoSettingsOutline fontSize={24} />
+              <Typography
+                fontSize={14}
+                fontWeight={500}
+                color={"#222"}
+                onClick={() => navigate("/my-favourite")}
               >
-                Đăng xuất
-              </Button>
-            ) : (
+                QUẢN TRỊ VIÊN
+              </Typography>
+            </MenuItem>
+          )}
+
+          {user && (
+            <MenuItem>
+              <IoHeart fontSize={24} color="red" />
+              <Typography
+                fontSize={14}
+                fontWeight={500}
+                color={"#222"}
+                onClick={() => navigate("/my-favourite")}
+              >
+                DANH MỤC YÊU THÍCH
+              </Typography>
+            </MenuItem>
+          )}
+
+          <Box p={2}>
+            {!user && (
               <Button
-                variant="contained"
+                variant="outlined"
                 fullWidth
                 onClick={() => {
                   setIsOpenDrawerMB(false);
