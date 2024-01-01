@@ -28,17 +28,33 @@ function DetailProductImg({ data }) {
 
   return (
     <Box>
-      <Grid container>
-        <Grid item xs={3}>
+      <Grid
+        container
+        direction={{ xs: "column-reverse", sm: "row" }}
+        spacing={1}
+      >
+        <Grid
+          item
+          xs={12}
+          sm={3}
+          sx={{
+            maxWidth: {
+              xs: "90vw !important",
+              sm: "none",
+              overflowX: "scroll",
+            },
+          }}
+        >
           <Box
             sx={{
+              maxHeight: "100%",
+              maxWidth: "100%",
               cursor: "pointer",
-              overflowX: "scroll",
             }}
             display={"flex"}
             gap={1}
             width={"100%"}
-            flexDirection={"column"}
+            flexDirection={{ xs: "row", sm: "column" }}
             alignItems={"center"}
           >
             {listImg?.map((img, index) => (
@@ -52,7 +68,7 @@ function DetailProductImg({ data }) {
             ))}
           </Box>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9}>
           <ReactImageMagnify
             {...{
               smallImage: {

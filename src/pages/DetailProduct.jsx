@@ -98,7 +98,7 @@ function DetailProduct() {
           <Box mt={4}>
             <Grid container spacing={4}>
               {arrRelatedVideo.map((e) => (
-                <Grid item xs={12} sm={12} md={6} lg={6} key={e?._id}>
+                <Grid item xs={12} sm={12} md={4} lg={4} key={e?._id}>
                   <ProductCard item={e} />
                 </Grid>
               ))}

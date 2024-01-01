@@ -4,7 +4,7 @@ import Contact from "./Contact";
 
 const ListContact = () => {
   return (
-    <Box position={"fixed"} bottom={40} left={20} zIndex={1}>
+    <Box position={"fixed"} bottom={40} left={20} zIndex={999}>
       <Link href="" target="_blank">
         <Contact
           image={"/img/ZaloContact.png"}

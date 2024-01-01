@@ -84,10 +84,17 @@ function InfoDetailProduct({ data }) {
 
   return (
     <Box>
-      <Box fontSize={24} fontWeight={"bold"} color={"#222"}>
-        {data?.name}
+      <Box
+        display={"flex"}
+        flexDirection={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        gap={1}
+      >
+        <Typography fontSize={24} fontWeight={"bold"} color={"#222"}>
+          {data?.name}
+        </Typography>
+
         <Typography
-          ml={2}
           fontSize={14}
           component={"span"}
         >{`(${data?.views}) Lượt xem`}</Typography>
@@ -96,7 +103,9 @@ function InfoDetailProduct({ data }) {
         mt={2}
         display={"flex"}
         justifyContent={"space-between"}
-        alignItems={"flex-end"}
+        alignItems={{ xs: "flex-start", sm: "flex-end" }}
+        flexDirection={{ xs: "column", sm: "row" }}
+        gap={1}
       >
         <Box display={"flex"} gap={1} alignItems={"center"}>
           <Typography color={"red"} fontSize={14} fontWeight={500}>
