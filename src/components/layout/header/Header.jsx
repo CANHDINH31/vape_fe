@@ -461,13 +461,11 @@ function Header() {
             </Typography>
           </MenuItem>
           {arrCategory?.map((e, index) => (
-            <MenuItem key={index}>
-              <Typography
-                fontSize={14}
-                fontWeight={500}
-                color={"#222"}
-                onClick={() => navigate(`/category/${e._id}`)}
-              >
+            <MenuItem
+              key={index}
+              onClick={() => navigate(`/category/${e._id}`)}
+            >
+              <Typography fontSize={14} fontWeight={500} color={"#222"}>
                 {e?.name?.toUpperCase()}
               </Typography>
             </MenuItem>
