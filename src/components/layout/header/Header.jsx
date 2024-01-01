@@ -265,13 +265,14 @@ function Header() {
         </Box>
       )}
 
+      {/* DRAWER AUTH */}
       <Drawer
         anchor={"right"}
         open={isOpenDrawer}
         onClose={() => setIsOpenDrawer(false)}
       >
         <Box
-          sx={{ width: "20vw" }}
+          sx={{ width: "25vw" }}
           component={"form"}
           onSubmit={!isLogin ? handleRegister : handleLogin}
         >
@@ -341,23 +342,31 @@ function Header() {
             </Box>
             <Box mt={4} sx={{ cursor: "pointer" }} textAlign={"center"}>
               {!isLogin ? (
-                <Typography
-                  fontSize={14}
-                  fontWeight={500}
-                  color={"primary"}
-                  onClick={() => setIsLogin(!isLogin)}
-                >
-                  Already have an account? Login here
-                </Typography>
+                <Box textAlign={"center"}>
+                  <Typography fontSize={14} fontWeight={600} mb={1}>
+                    Already have an account ?
+                  </Typography>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    onClick={() => setIsLogin(!isLogin)}
+                  >
+                    Login now
+                  </Button>
+                </Box>
               ) : (
-                <Typography
-                  fontSize={14}
-                  fontWeight={500}
-                  color={"primary"}
-                  onClick={() => setIsLogin(!isLogin)}
-                >
-                  New Customer? Register here
-                </Typography>
+                <Box textAlign={"center"}>
+                  <Typography fontSize={14} fontWeight={600} mb={1}>
+                    Don't have an Account ?
+                  </Typography>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    onClick={() => setIsLogin(!isLogin)}
+                  >
+                    Register here
+                  </Button>
+                </Box>
               )}
             </Box>
           </Box>
