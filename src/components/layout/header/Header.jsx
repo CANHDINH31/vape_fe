@@ -8,6 +8,7 @@ import {
   Popover,
   Badge,
   useMediaQuery,
+  styled,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
@@ -23,8 +24,20 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "../../../utils/redux/userSlice";
 import { useSelector } from "react-redux";
 import { IoIosLogOut } from "react-icons/io";
-import { IoSettingsOutline } from "react-icons/io5";
-import { IoIosList } from "react-icons/io";
+import { IoSettingsOutline, IoHomeOutline } from "react-icons/io5";
+import { IoIosList, IoIosLogIn } from "react-icons/io";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
+const MenuItem = styled(Box)({
+  padding: 16,
+  borderBottom: "1px solid rgba(34,34,34,0.2)",
+  display: "flex",
+  gap: 8,
+  alignItems: "center",
+  "&:hover": {
+    background: "rgba(34,34,34,0.1)",
+  },
+});
 
 function Header() {
   const navigate = useNavigate();
@@ -34,6 +47,8 @@ function Header() {
   const isMoblie = useMediaQuery("(max-width:600px)");
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
+  const [isOpenDrawerMB, setIsOpenDrawerMB] = useState(false);
+
   const [arrCategory, setArrCategory] = useState([]);
   const [isLogin, setIsLogin] = useState(true);
 
@@ -52,6 +67,7 @@ function Header() {
       setUsername("");
       setPassword("");
       notify("success", "Đăng kí tài khoản thành công");
+      setIsOpenDrawerMB(false);
     } catch (error) {
       notify("error", error?.response?.data?.message);
     }
@@ -67,6 +83,7 @@ function Header() {
       setIsOpenDrawer(false);
       setAnchorEl(null);
       notify("success", "Đăng nhập thành công");
+      setIsOpenDrawerMB(false);
     } catch (error) {
       notify("error", error?.response?.data?.message);
     }
@@ -198,7 +215,9 @@ function Header() {
                               onClick={() => navigate("/admin/user")}
                             >
                               <IoSettingsOutline fontSize={24} />
-                              <Typography>Quản trị viên</Typography>
+                              <Typography fontSize={14} fontWeight={500}>
+                                Quản trị viên
+                              </Typography>
                             </Box>
                             <Divider />
                           </>
@@ -214,7 +233,9 @@ function Header() {
                           onClick={handleLogout}
                         >
                           <IoIosLogOut fontSize={24} />
-                          <Typography>Đăng xuất</Typography>
+                          <Typography fontSize={14} fontWeight={500}>
+                            Đăng xuất
+                          </Typography>
                         </Box>
                       </Box>
                     </Popover>
@@ -246,7 +267,11 @@ function Header() {
           borderBottom={"1px solid rgb(61, 61, 61)"}
           paddingX={1}
         >
-          <IoIosList fontSize={38} color={"white"} />
+          <IoIosList
+            fontSize={38}
+            color={"white"}
+            onClick={() => setIsOpenDrawerMB(true)}
+          />
           <Box
             component={"img"}
             src={"/img/Logo.png"}
@@ -272,7 +297,7 @@ function Header() {
         onClose={() => setIsOpenDrawer(false)}
       >
         <Box
-          sx={{ width: "25vw" }}
+          sx={{ width: { xs: "80vw", md: "25vw" } }}
           component={"form"}
           onSubmit={!isLogin ? handleRegister : handleLogin}
         >
@@ -369,6 +394,83 @@ function Header() {
                 </Box>
               )}
             </Box>
+          </Box>
+        </Box>
+      </Drawer>
+
+      {/* DRAWER AUTH */}
+      <Drawer
+        anchor={"left"}
+        open={isOpenDrawerMB}
+        onClose={() => setIsOpenDrawerMB(false)}
+      >
+        <Box width={"80vw"}>
+          <Box
+            p={2}
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"flex-start"}
+          >
+            <Box
+              component={"img"}
+              src={"/img/Logo.png"}
+              width={80}
+              sx={{ objectFit: "contain" }}
+            />
+            <Box onClick={() => setIsOpenDrawerMB(false)}>
+              <CloseOutlinedIcon sx={{ color: "red" }} />
+            </Box>
+          </Box>
+          <MenuItem borderTop={"1px solid rgba(34,34,34,0.2)"}>
+            <IoHomeOutline fontSize={24} />
+            <Typography
+              fontSize={14}
+              fontWeight={500}
+              color={"#222"}
+              onClick={() => navigate("/")}
+            >
+              TRANG CHỦ
+            </Typography>
+          </MenuItem>
+          {arrCategory?.map((e, index) => (
+            <MenuItem key={index}>
+              <Typography
+                fontSize={14}
+                fontWeight={500}
+                color={"#222"}
+                onClick={() => navigate(`/category/${e._id}`)}
+              >
+                {e?.name?.toUpperCase()}
+              </Typography>
+            </MenuItem>
+          ))}
+          <Box p={2}>
+            {user ? (
+              <Button
+                variant="contained"
+                fullWidth
+                color="error"
+                onClick={() => {
+                  setIsOpenDrawerMB(false);
+                  handleLogout();
+                }}
+                startIcon={<IoIosLogIn />}
+              >
+                Đăng xuất
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => {
+                  setIsOpenDrawerMB(false);
+                  setIsOpenDrawer(true);
+                }}
+                startIcon={<IoIosLogIn />}
+              >
+                Đăng nhập
+              </Button>
+            )}
           </Box>
         </Box>
       </Drawer>

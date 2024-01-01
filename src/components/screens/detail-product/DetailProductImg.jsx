@@ -1,4 +1,4 @@
-import { Box, Grid, styled } from "@mui/material";
+import { Box, Grid, styled, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 
@@ -14,6 +14,8 @@ const MoreImg = styled(Box)({
 });
 
 function DetailProductImg({ data }) {
+  const isMoblie = useMediaQuery("(max-width:600px)");
+
   const [listImg, setListImge] = useState([]);
   const [active, setActive] = useState("");
 
@@ -69,20 +71,30 @@ function DetailProductImg({ data }) {
           </Box>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <ReactImageMagnify
-            {...{
-              smallImage: {
-                alt: "",
-                isFluidWidth: true,
-                src: active,
-              },
-              largeImage: {
-                src: active,
-                width: 1200,
-                height: 1800,
-              },
-            }}
-          />
+          {isMoblie ? (
+            <Box
+              component={"img"}
+              display={"block"}
+              width={"100vw"}
+              src={active}
+              sx={{ objectFit: "contain" }}
+            />
+          ) : (
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "",
+                  isFluidWidth: true,
+                  src: active,
+                },
+                largeImage: {
+                  src: active,
+                  width: 1200,
+                  height: 1800,
+                },
+              }}
+            />
+          )}
         </Grid>
       </Grid>
     </Box>
