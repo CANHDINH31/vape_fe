@@ -218,7 +218,16 @@ function InfoDetailProduct({ data }) {
 
       <Box mt={2} display={"flex"} gap={2}>
         <AmountWrap>
-          <FaMinus fontSize={14} onClick={() => setAmount(amount - 1)} />
+          <FaMinus
+            fontSize={14}
+            onClick={() => {
+              if (amount < 2) {
+                setAmount(1);
+              } else {
+                setAmount(amount - 1);
+              }
+            }}
+          />
           <Typography fontSize={14} fontWeight={"bold"}>
             {amount}
           </Typography>
