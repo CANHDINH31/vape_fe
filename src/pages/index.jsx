@@ -7,7 +7,14 @@ import Drop from "../components/screens/home/Drop";
 import Flavor from "../components/screens/home/Flavor";
 import Product from "../components/screens/home/Product";
 import MainLayout from "../components/layout/MainLayout";
-import { Box, Button, Grid, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { listCategory } from "../utils/api/category";
 import ProductCard from "../components/screens/product/ProductCard";
 
@@ -32,43 +39,45 @@ function Home() {
       {isMoblie ? (
         <>
           <Banner />
-          {arrCategory?.map((e) => {
-            if (e?.product?.length > 0) {
-              const productsToRender = e.product.slice(0, 6);
-              return (
-                <Box key={e._id} mt={8}>
-                  <Typography
-                    textAlign={"center"}
-                    fontWeight={"bold"}
-                    fontSize={18}
-                  >
-                    {e?.name}
-                  </Typography>
-                  <Box mt={2}>
-                    <Grid container spacing={4}>
-                      {productsToRender.map((i) => (
-                        <Grid item xs={6} sm={6} md={3} lg={3} key={i._id}>
-                          <ProductCard item={i} />
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Box>
-
-                  <Box mt={2} textAlign={"center"}>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      href={`/category/${e._id}`}
+          <Container>
+            {arrCategory?.map((e) => {
+              if (e?.product?.length > 0) {
+                const productsToRender = e.product.slice(0, 6);
+                return (
+                  <Box key={e._id} mt={8}>
+                    <Typography
+                      textAlign={"center"}
+                      fontWeight={"bold"}
+                      fontSize={18}
                     >
-                      Xem thêm
-                    </Button>
+                      {e?.name}
+                    </Typography>
+                    <Box mt={2}>
+                      <Grid container spacing={4}>
+                        {productsToRender.map((i) => (
+                          <Grid item xs={6} sm={6} md={3} lg={3} key={i._id}>
+                            <ProductCard item={i} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Box>
+
+                    <Box mt={2} textAlign={"center"}>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        href={`/category/${e._id}`}
+                      >
+                        Xem thêm
+                      </Button>
+                    </Box>
                   </Box>
-                </Box>
-              );
-            }
-            return null;
-          })}
+                );
+              }
+              return null;
+            })}
+          </Container>
         </>
       ) : (
         <>
