@@ -136,7 +136,11 @@ function InfoDetailProduct({ data }) {
               <FlashItem>
                 <IoIosFlash color="#ec3814" />
                 <Typography color="#ec3814" fontSize={14} fontWeight={600}>
-                  20%
+                  {Number(
+                    ((Number(data?.price) - Number(data?.discountPrice)) /
+                      Number(data?.price)) *
+                      100
+                  ).toFixed(0)}
                 </Typography>
               </FlashItem>
             </Box>
