@@ -3,13 +3,12 @@ import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
-import { MdOutlineAttachMoney } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { notify } from "../../../utils/helpers/notify";
 import { favourite } from "../../../utils/redux/userSlice";
 import { FaHeart } from "react-icons/fa";
 import { updateUser } from "../../../utils/api/user";
+import { IoIosFlash } from "react-icons/io";
 
 const AmountWrap = styled(Box)({
   display: "flex",
@@ -41,6 +40,15 @@ const WrapIcon = styled(Box)({
       color: "red",
     },
   },
+});
+
+const FlashItem = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  background: "#ffe97a",
+  borderRadius: 8,
+  padding: "1px 8px",
+  gap: 2,
 });
 
 function InfoDetailProduct({ data }) {
@@ -107,8 +115,38 @@ function InfoDetailProduct({ data }) {
         flexDirection={{ xs: "column", sm: "row" }}
         gap={1}
       >
-        <Box display={"flex"} gap={1} alignItems={"center"}>
-          <Typography color={"red"} fontSize={14} fontWeight={500}>
+        <Box display={"flex"} gap={2} alignItems={"center"}>
+          {data?.discountPrice && (
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              width={"100%"}
+              alignItems={"center"}
+              gap={1}
+            >
+              <Typography
+                fontSize={{ xs: 12, md: 14 }}
+                sx={{ textDecoration: "line-through" }}
+              >
+                {data?.discountPrice.toLocaleString("it-IT", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </Typography>
+              <FlashItem>
+                <IoIosFlash color="#ec3814" />
+                <Typography color="#ec3814" fontSize={14} fontWeight={600}>
+                  20%
+                </Typography>
+              </FlashItem>
+            </Box>
+          )}
+          <Typography
+            color={"red"}
+            fontSize={14}
+            fontWeight={500}
+            whiteSpace={"nowrap"}
+          >
             ${" "}
             {data?.price > 0
               ? data?.price.toLocaleString("it-IT", {
@@ -117,8 +155,6 @@ function InfoDetailProduct({ data }) {
                 })
               : "Liên hệ để thông tin giá"}
           </Typography>
-
-          <Rating size="small" value={5} />
         </Box>
         <Box display={"flex"} gap={1} alignItems={"center"}>
           <Chip
@@ -177,7 +213,7 @@ function InfoDetailProduct({ data }) {
       )}
 
       <Box mt={2} display={"flex"} gap={2}>
-        {/* <AmountWrap>
+        <AmountWrap>
           <FaMinus fontSize={14} onClick={() => setAmount(amount - 1)} />
           <Typography fontSize={14} fontWeight={"bold"}>
             {amount}
@@ -187,25 +223,11 @@ function InfoDetailProduct({ data }) {
         <Button
           variant="contained"
           color="error"
-          sx={{
-            borderRadius: "20px",
-            background: "#222",
-            "&:hover": {
-              backgroundColor: "#222",
-            },
-          }}
-          startIcon={<MdOutlineAttachMoney />}
-        >
-          BUY IT NOW
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
           sx={{ borderRadius: "20px" }}
           startIcon={<MdOutlineShoppingCart />}
         >
           ART TO CART
-        </Button> */}
+        </Button>
         <Box onClick={(e) => handleFavourite(e, data)}>
           {user?.favourite?.map((e) => e?._id)?.includes(data?._id) ? (
             <WrapIcon sx={{ borderColor: "red" }}>
