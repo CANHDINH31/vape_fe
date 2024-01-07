@@ -6,12 +6,13 @@ import {
   HiOutlineEye,
 } from "react-icons/hi2";
 import { HiHeart } from "react-icons/hi";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { notify } from "../../../utils/helpers/notify";
 import { favourite } from "../../../utils/redux/userSlice";
 import { updateUser } from "../../../utils/api/user";
+import { IoIosFlash } from "react-icons/io";
+import { RiProductHuntLine } from "react-icons/ri";
 
 const Wrapper = styled(Box)({
   position: "relative",
@@ -80,6 +81,15 @@ const WrapIcon = styled(Box)({
   },
 });
 
+const FlashItem = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  background: "#ffe97a",
+  borderRadius: 8,
+  padding: "1px 8px",
+  gap: 2,
+});
+
 function ProductCard({ item, isTop = false }) {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state?.user);
@@ -121,9 +131,9 @@ function ProductCard({ item, isTop = false }) {
           <WrapIcon>
             <HiOutlineEye />
           </WrapIcon>
-          {/* <WrapIcon>
+          <WrapIcon>
             <HiOutlineShoppingBag />
-          </WrapIcon> */}
+          </WrapIcon>
           <WrapIcon onClick={(e) => handleFavourite(e, item)}>
             {user?.favourite?.map((e) => e?._id)?.includes(item?._id) ? (
               <HiHeart width={28} color="red" />
@@ -134,34 +144,65 @@ function ProductCard({ item, isTop = false }) {
         </Box>
       </WrapImg>
 
-      <Stack textAlign={"center"} gap={"2px"} mt={1} width={"100%"}>
-        <Typography fontSize={14} fontWeight={"bold"}>
+      <Stack textAlign={"start"} gap={"2px"} mt={1} width={"100%"}>
+        <Typography fontSize={14} fontWeight={500}>
           {item?.name}
         </Typography>
-        <Typography fontSize={10} color="red" fontWeight={"bold"}>
+        {item?.discountPrice && (
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            width={"100%"}
+            alignItems={"center"}
+          >
+            <Typography
+              fontSize={{ xs: 12, md: 14 }}
+              sx={{ textDecoration: "line-through" }}
+            >
+              {item?.discountPrice.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Typography>
+            <FlashItem>
+              <IoIosFlash color="#ec3814" />
+              <Typography color="#ec3814" fontSize={14} fontWeight={600}>
+                20%
+              </Typography>
+            </FlashItem>
+          </Box>
+        )}
+
+        <Typography fontSize={16} color="red" fontWeight={600}>
           {item?.price > 0
             ? item?.price.toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
               })
-            : "Liên hệ để thông tin giá"}
+            : ""}
         </Typography>
         <Box
           display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          gap={1}
+          alignItems={{ xs: "flex-start", md: "center" }}
+          justifyContent={"space-between"}
           flexDirection={{ xs: "column", md: "row" }}
+          gap={1}
         >
           <Rating size="small" value={5} />
           {isTop ? (
-            <Typography fontSize={12} fontWeight={"bold"}>
-              {item?.views} Lượt xem
-            </Typography>
+            <Box display={"flex"} alignItems={"center"} gap={0.5}>
+              <HiOutlineEye />
+              <Typography fontSize={12} fontWeight={600}>
+                {item?.views} Lượt xem
+              </Typography>
+            </Box>
           ) : (
-            <Typography fontSize={12} fontWeight={"bold"}>
-              {item?.number} Sản phẩm
-            </Typography>
+            <Box display={"flex"} alignItems={"center"} gap={0.5}>
+              <RiProductHuntLine />
+              <Typography fontSize={12} fontWeight={600}>
+                {item?.number} Sản phẩm
+              </Typography>
+            </Box>
           )}
         </Box>
       </Stack>

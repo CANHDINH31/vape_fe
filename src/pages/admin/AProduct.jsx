@@ -34,6 +34,7 @@ function AProduct() {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [number, setNumber] = useState(0);
   const [nameType, setNameType] = useState("");
@@ -180,6 +181,7 @@ function AProduct() {
     setName("");
     setStruct("");
     setPrice(0);
+    setDiscountPrice(0);
     setDescription("");
     setNameType("");
     setNumber(0);
@@ -196,6 +198,7 @@ function AProduct() {
     setStruct("");
     setName("");
     setPrice(0);
+    setDiscountPrice(0);
     setDescription("");
     setNameType("");
     setNumber(0);
@@ -211,6 +214,7 @@ function AProduct() {
       await create({
         name,
         price: Number(price),
+        discountPrice: Number(discountPrice),
         number: Number(number),
         description,
         struct,
@@ -243,6 +247,7 @@ function AProduct() {
       await updateProduct(idUpdate, {
         name,
         price: Number(price),
+        discountPrice: Number(discountPrice),
         number: Number(number),
         description,
         struct,
@@ -282,6 +287,7 @@ function AProduct() {
     setNameType(data?.nameType);
     setNumber(data?.number || 0);
     setPrice(data?.price || 0);
+    setDiscountPrice(data?.discountPrice || 0);
     setTypes(data?.types?.join(","));
     setDescription(data?.description);
     setStruct(data?.struct);
@@ -395,6 +401,25 @@ function AProduct() {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography>Số lượng:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Giá khuyến mại:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              type="number"
+              value={discountPrice}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
             <Typography>Mô tả:</Typography>
             <TextField
               fullWidth
@@ -416,15 +441,7 @@ function AProduct() {
               onChange={(e) => setStruct(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Typography>Số lượng:</Typography>
-            <TextField
-              fullWidth
-              size="small"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={6}>
             <Typography>Tên phân loại:</Typography>
             <TextField
@@ -627,6 +644,25 @@ function AProduct() {
             />
           </Grid>
           <Grid item xs={6}>
+            <Typography>Giá khuyến mại:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              type="number"
+              value={discountPrice}
+              onChange={(e) => setDiscountPrice(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>Số lượng:</Typography>
+            <TextField
+              fullWidth
+              size="small"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
             <Typography>Mô tả:</Typography>
             <TextField
               fullWidth
@@ -648,15 +684,7 @@ function AProduct() {
               onChange={(e) => setStruct(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Typography>Số lượng:</Typography>
-            <TextField
-              fullWidth
-              size="small"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={6}>
             <Typography>Tên phân loại:</Typography>
             <TextField

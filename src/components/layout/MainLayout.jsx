@@ -23,7 +23,7 @@ function MainLayout({ children, showWarning = true }) {
     <Box width={"100%"}>
       {showWarning && <Warning />}
       <Header />
-      <Box minHeight={"70vh"} pb={8}>
+      <Box minHeight={"70vh"} pb={{ xs: 8, sm: 0 }}>
         {children}
       </Box>
       <Footer />
