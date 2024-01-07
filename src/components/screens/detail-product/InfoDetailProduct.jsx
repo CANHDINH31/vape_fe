@@ -15,9 +15,9 @@ const AmountWrap = styled(Box)({
   alignItems: "center",
   justifyContent: "space-between",
   border: "1px solid #222",
-  gap: 28,
+  gap: 24,
   borderRadius: "20px",
-  padding: "10px 16px",
+  padding: "10px 14px",
   width: "min-content",
   "& svg": {
     "&:hover": {
