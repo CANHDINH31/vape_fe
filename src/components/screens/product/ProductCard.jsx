@@ -39,10 +39,9 @@ const WrapImg = styled(Box)({
 
   "& .img": {
     display: "block",
-    width: 270,
-    height: 270,
     transition: "all 0.3s ease-in-out",
-    objectFit: "cover",
+    width: "100%",
+    objectFit: "contain",
   },
 
   "& .overlay": {
@@ -152,6 +151,7 @@ function ProductCard({ item, isTop = false }) {
           alignItems={"center"}
           justifyContent={"center"}
           gap={1}
+          flexDirection={{ xs: "column", md: "row" }}
         >
           <Rating size="small" value={5} />
           {isTop ? (
