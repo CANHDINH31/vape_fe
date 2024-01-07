@@ -68,16 +68,16 @@ function AgeVerify() {
     <Wrapper>
       <Box textAlign={"center"}>
         <Typography color={"white"} fontSize={28} fontWeight={700}>
-          AGE VERIFICATION
+          XÁC MINH ĐỘ TUỔI
         </Typography>
         <Typography color={"white"} fontSize={12} mt={4}>
-          To use the OXVA website you must be at least 21 years old or above.
+          Để truy cập website, bạn phải ít nhất 21 tuổi trở lên.
           <br />
-          Please verify your age before entering the site.
+          Vui lòng xác minh tuổi của bạn trước khi vào trang web.
         </Typography>
         <Box mt={4} display={"flex"} gap={2} justifyContent={"center"}>
           <ButtonCustom onClick={() => navigate("/about:blank")}>
-            Under 21
+            {"< 21"}
           </ButtonCustom>
           <ButtonCustom
             onClick={() => {
@@ -85,12 +85,12 @@ function AgeVerify() {
               navigate("/");
             }}
           >
-            I am 21+
+            21 +
           </ButtonCustom>
         </Box>
         <Typography color={"white"} fontSize={12} mt={4}>
-          WARNING: This product contains nicotine. Nicotine is an addictive
-          chemical.
+          CẢNH BÁO: Sản phẩm này có chứa nicotin. Nicotine là chất gây nghiện
+          hóa chất.
         </Typography>
       </Box>
     </Wrapper>
