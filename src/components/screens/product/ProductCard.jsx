@@ -134,7 +134,7 @@ function ProductCard({ item, isTop = false }) {
         </Box>
       </WrapImg>
 
-      <Stack textAlign={"center"} gap={"2px"} mt={1} width={270}>
+      <Stack textAlign={"center"} gap={"2px"} mt={1} width={"100%"}>
         <Typography fontSize={14} fontWeight={"bold"}>
           {item?.name}
         </Typography>
