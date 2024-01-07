@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  // HiOutlineShoppingBag,
+  HiOutlineShoppingBag,
   HiOutlineHeart,
   HiOutlineUser,
 } from "react-icons/hi2";
@@ -171,8 +171,8 @@ function Header() {
               padding={"8px 16px"}
               borderRadius={"18px"}
             >
-              {/* <HiOutlineShoppingBag fontSize={24} />
-          <Box width={"1px"} height={20} bgcolor={"#cecece"} /> */}
+              <HiOutlineShoppingBag fontSize={24} />
+              <Box width={"1px"} height={20} bgcolor={"#cecece"} />
               <Badge
                 badgeContent={user?.favourite?.length}
                 color="info"
@@ -283,11 +283,11 @@ function Header() {
           />
 
           <Badge
-            badgeContent={user?.favourite?.length}
+            // badgeContent={user?.favourite?.length}
             color="info"
             onClick={handleFavourite}
           >
-            <HiOutlineHeart fontSize={38} color={"white"} />
+            <HiOutlineShoppingBag fontSize={38} color={"white"} />
           </Badge>
         </Box>
       )}
@@ -497,7 +497,7 @@ function Header() {
                 color={"#222"}
                 onClick={() => navigate("/my-favourite")}
               >
-                DANH MỤC YÊU THÍCH
+                DANH MỤC YÊU THÍCH ({user?.favourite?.length})
               </Typography>
             </MenuItem>
           )}
