@@ -34,10 +34,14 @@ function MainProduct() {
 
   return (
     <Box>
-      <Typography textAlign={"center"} fontWeight={"bold"} fontSize={24}>
+      <Typography
+        textAlign={"center"}
+        fontWeight={"bold"}
+        fontSize={{ xs: 18, sm: 24 }}
+      >
         {data?.name}
       </Typography>
-      <Box mt={4}>
+      <Box mt={{ xs: 2, sm: 4 }}>
         <Grid container spacing={4}>
           {data?.product?.map((e) => (
             <Grid item xs={6} sm={6} md={3} lg={3} key={e?._id}>
@@ -46,10 +50,15 @@ function MainProduct() {
           ))}
         </Grid>
       </Box>
-      <Typography mt={8} textAlign={"center"} fontWeight={"bold"} fontSize={24}>
-        TOP SẢN PHẨM CÓ LƯỢT XEM CAO NHẤT
+      <Typography
+        mt={8}
+        textAlign={"center"}
+        fontWeight={"bold"}
+        fontSize={{ xs: 18, sm: 24 }}
+      >
+        TOP CÓ LƯỢT XEM CAO NHẤT
       </Typography>
-      <Box mt={4}>
+      <Box mt={{ xs: 2, sm: 4 }}>
         <Grid container spacing={4}>
           {arrTopView.map((e) => (
             <Grid item xs={6} sm={6} md={3} lg={3} key={e?._id}>

@@ -463,7 +463,10 @@ function Header() {
           {arrCategory?.map((e, index) => (
             <MenuItem
               key={index}
-              onClick={() => navigate(`/category/${e._id}`)}
+              onClick={() => {
+                setIsOpenDrawerMB(false);
+                navigate(`/category/${e._id}`);
+              }}
             >
               <Typography fontSize={14} fontWeight={500} color={"#222"}>
                 {e?.name?.toUpperCase()}

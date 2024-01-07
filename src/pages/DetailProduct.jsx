@@ -91,11 +91,11 @@ function DetailProduct() {
             mt={8}
             textAlign={"center"}
             fontWeight={"bold"}
-            fontSize={24}
+            fontSize={{ xs: 18, sm: 24 }}
           >
             SẢN PHẨM LIÊN QUAN
           </Typography>
-          <Box mt={4}>
+          <Box mt={{ xs: 2, sm: 4 }}>
             <Grid container spacing={4}>
               {arrRelatedVideo.map((e) => (
                 <Grid item xs={6} sm={6} md={3} lg={3} key={e?._id}>
