@@ -27,7 +27,6 @@ import { IoIosLogOut } from "react-icons/io";
 import { IoSettingsOutline, IoHomeOutline, IoHeart } from "react-icons/io5";
 import { IoIosList, IoIosLogIn } from "react-icons/io";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { FaRegUserCircle } from "react-icons/fa";
 import { LuUserCheck } from "react-icons/lu";
 
 const MenuItem = styled(Box)({
@@ -171,7 +170,14 @@ function Header() {
               padding={"8px 16px"}
               borderRadius={"18px"}
             >
-              <HiOutlineShoppingBag fontSize={24} />
+              <Badge
+                badgeContent={user?.cart?.length}
+                color="error"
+                onClick={handleFavourite}
+              >
+                <HiOutlineShoppingBag fontSize={24} />
+              </Badge>
+
               <Box width={"1px"} height={20} bgcolor={"#cecece"} />
               <Badge
                 badgeContent={user?.favourite?.length}
@@ -283,8 +289,8 @@ function Header() {
           />
 
           <Badge
-            // badgeContent={user?.favourite?.length}
-            color="info"
+            badgeContent={user?.cart?.length}
+            color="error"
             onClick={handleFavourite}
           >
             <HiOutlineShoppingBag fontSize={38} color={"white"} />

@@ -22,7 +22,7 @@ function MainFavourite() {
       <Box mt={4}>
         <Grid container spacing={2}>
           {user?.favourite?.map((item) => (
-            <Grid item xs={12} sm={12} md={6} lg={4} key={item?._id}>
+            <Grid item xs={6} sm={6} md={3} lg={3} key={item?._id}>
               <ProductCard item={item} />
             </Grid>
           ))}

@@ -83,7 +83,7 @@ function DetailProduct() {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <InfoDetailProduct zIndex1={1} data={data} />
+                <InfoDetailProduct zIndex1={1} data={data} productId={id} />
               </Grid>
             </Grid>
           </Box>

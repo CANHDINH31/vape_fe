@@ -5,7 +5,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { notify } from "../../../utils/helpers/notify";
-import { favourite } from "../../../utils/redux/userSlice";
+import { favourite, login } from "../../../utils/redux/userSlice";
 import { FaHeart } from "react-icons/fa";
 import { updateUser } from "../../../utils/api/user";
 import { IoIosFlash } from "react-icons/io";
@@ -51,7 +51,7 @@ const FlashItem = styled(Box)({
   gap: 2,
 });
 
-function InfoDetailProduct({ data }) {
+function InfoDetailProduct({ data, productId }) {
   const { user } = useSelector((state) => state?.user);
   const dispatch = useDispatch();
 
@@ -79,6 +79,40 @@ function InfoDetailProduct({ data }) {
       } catch (error) {
         console.log(error);
       }
+    }
+  };
+
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    try {
+      if (!user) {
+        notify("warn", "Bạn phải đăng nhập để sử dụng chức năng này");
+      } else {
+        const existingProductIndex = user.cart.findIndex(
+          (item) => item.product._id === productId && item.type === active
+        );
+
+        if (existingProductIndex !== -1) {
+          user.cart[existingProductIndex].amount += amount;
+        } else {
+          user.cart.push({
+            product: { _id: productId },
+            type: active,
+            amount: amount,
+          });
+        }
+
+        const updateCart = user?.cart?.map((e) => ({
+          ...e,
+          product: e.product?._id,
+        }));
+
+        const res = await updateUser(user?._id, { cart: updateCart });
+        dispatch(login(res.data));
+        notify("success", "Thêm vào giỏ hàng thành công");
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -238,6 +272,7 @@ function InfoDetailProduct({ data }) {
           color="error"
           sx={{ borderRadius: "20px" }}
           startIcon={<MdOutlineShoppingCart />}
+          onClick={handleAddToCart}
         >
           ART TO CART
         </Button>
